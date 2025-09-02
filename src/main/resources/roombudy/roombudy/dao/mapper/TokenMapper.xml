@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="roombudy.roombudy.dao.mapper.TokenMapper">
+
+
+    <select id="findByMemberId" resultType="Token" parameterType="Long">
+        SELECT *
+        FROM token
+        WHERE member_id = #{memberId}
+    </select>
+
+    <select id="findByRefreshToken" resultType="Token" parameterType="String">
+        SELECT *
+        FROM token
+        WHERE refresh_token = #{refreshToken}
+    </select>
+
+    <delete id="delete" parameterType="Long">
+        DELETE
+        FROM token
+        WHERE token_id = #{id}
+    </delete>
+
+    <delete id="deleteByMemberId" parameterType="Long">
+        DELETE
+        FROM token
+        WHERE member_id = #{id}
+    </delete>
+
+
+
+
+    <insert id="save" parameterType="Token" useGeneratedKeys="true" keyProperty="tokenId">
+        INSERT INTO token(member_id , refresh_token ,created_at, updated_at)
+        VALUES (#{memberId}, #{refreshToken},NOW(),NOW())
+    </insert>
+
+
+</mapper>

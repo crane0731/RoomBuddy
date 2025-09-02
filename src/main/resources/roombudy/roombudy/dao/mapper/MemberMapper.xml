@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="roombudy.roombudy.dao.mapper.MemberMapper">
+
+
+    <insert id ="save" parameterType="Member" useGeneratedKeys="true" keyProperty="memberId">
+        INSERT INTO member(
+        email,
+        password,
+        name,
+        phone,
+        role,
+        created_at,
+        updated_at
+        )
+        VALUES (
+        #{email},
+        #{password},
+        #{name},
+        #{phone},
+        #{role},
+        NOW(),
+        NOW()
+        )
+    </insert>
+
+    <select id="findById" resultType="Member" parameterType="Long">
+        SELECT *
+        FROM member
+        WHERE member_id= #{id} and active_status = 'ACTIVE'
+    </select>
+
+
+    <select id="findByEmail" resultType="Member" parameterType="String">
+        SELECT *
+        FROM member
+        WHERE email=#{email} and active_status= 'ACTIVE'
+    </select>
+
+    <select id="existsByEmail" resultType="boolean" parameterType="String">
+
+        SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+        FROM member
+        WHERE email = #{email}
+
+    </select>
+
+    <select id="existsByPhone" resultType="boolean" parameterType="String">
+
+        SELECT CASE WHEN COUNT(*) > 0 THEN true ELSE false END
+        FROM member
+        WHERE phone = #{phone}
+
+    </select>
+
+    <select id="findMemberInfoById" resultType="MemberInfoResponseDto" parameterType="long">
+        SELECT m.member_id as memberId,
+        m.email as email,
+        m.name as name,
+        m.phone as phone,
+        m.role as role,
+        m.created_at as createdAt,
+        COALESCE(  COUNT(rv.reservation_id),0 ) AS reservationCount
+        FROM member m
+
+        LEFT JOIN reservation rv
+        ON m.member_id = rv.member_id
+        AND rv.active_status='ACTIVE'
+        AND rv.status IN ('COMPLETED')
+
+        WHERE m.member_id = #{id}
+        and m.active_status='ACTIVE'
+
+        GROUP BY m.member_id , m.email , m.name , m.phone , m.created_at
+    </select>
+
+    <select id="findAllByCond" resultType="MemberListResponseDto">
+        SELECT
+        m.member_id as memberId,
+        m.email as email,
+        m.name as name,
+        COALESCE(  COUNT(rv.reservation_id),0 ) AS reservationCount
+
+        FROM member m
+
+        LEFT JOIN reservation rv
+        ON m.member_id = rv.member_id
+        AND rv.active_status='ACTIVE'
+        AND rv.status IN ('COMPLETED')
+
+        <where>
+
+            m.active_status = 'ACTIVE'
+
+            <!-- 이름 like 검색 -->
+            <if test="cond != null and cond.name != null and cond.name != ''">
+                AND m.name LIKE CONCAT ('%',#{cond.name},'%')
+            </if>
+
+            <!-- 이메일 like 검색 -->
+            <if test="cond != null and cond.email != null and cond.email != ''">
+                AND m.email LIKE CONCAT('%', #{cond.email}, '%')
+            </if>
+        </where>
+
+        GROUP BY m.member_id , m.email , m.name
+
+        <choose>
+            <when test="cond != null and cond.sortType == 'HIGH_RESERVATION'">
+                ORDER BY reservationCount DESC , m.member_id DESC
+            </when>
+
+            <when test="cond != null and cond.sortType == 'LOW_RESERVATION'">
+                ORDER BY reservationCount ASC, m.member_id DESC
+            </when>
+
+            <when test="cond != null and cond.sortType == 'CREATED_ASC'">
+                ORDER BY m.created_at ASC, m.member_id ASC
+            </when>
+
+            <otherwise>
+                ORDER BY m.created_at DESC, m.member_id DESC
+            </otherwise>
+
+        </choose>
+        LIMIT #{limit} OFFSET #{offset}
+    </select>
+
+    <select id="countByCond" resultType="Long">
+        SELECT COUNT(*)
+
+        FROM member m
+
+        <where>
+            m.active_status = 'ACTIVE'
+
+            <!-- 이름 like 검색 -->
+            <if test="cond != null and cond.name != null and cond.name != ''">
+                AND m.name LIKE CONCAT ('%',#{cond.name},'%')
+            </if>
+
+            <!-- 이메일 like 검색 -->
+            <if test="cond != null and cond.email != null and cond.email != ''">
+                AND m.email LIKE CONCAT('%', #{cond.email}, '%')
+            </if>
+        </where>
+    </select>
+
+    <update id="updateNameById">
+        UPDATE member
+        SET name=#{name}
+        WHERE member_id=#{id}
+        AND active_status='ACTIVE'
+    </update>
+
+    <update id="updatePhoneById">
+        UPDATE member
+        SET phone=#{phone}
+        WHERE member_id=#{id}
+        AND active_status='ACTIVE'
+    </update>
+
+    <update id="updatePasswordById">
+        UPDATE member
+        SET password=#{password}
+        WHERE member_id=#{id}
+        AND active_status='ACTIVE'
+    </update>
+
+    <update id="softDelete">
+        UPDATE member
+        SET active_status = 'INACTIVE'
+        , name = '삭제된 회원 이름'
+        , email = '삭제된 회원 이메일'
+        , password ='삭제된 회원 비밀번호'
+        , phone ='삭제된 회원 전화번호'
+        WHERE member_id=#{id}
+        AND active_status='ACTIVE'
+    </update>
+
+
+</mapper>

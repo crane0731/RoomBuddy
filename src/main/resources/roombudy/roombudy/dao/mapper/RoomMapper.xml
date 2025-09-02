@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="roombudy.roombudy.dao.mapper.RoomMapper">
+
+    <insert id ="save" parameterType="Room" useGeneratedKeys="true" keyProperty="roomId">
+        INSERT INTO room(
+        name,
+        capacity,
+        active_status,
+        open_time,
+        close_time,
+        created_at,
+        updated_at
+        )
+        VALUES(
+        #{name},
+        #{capacity},
+        #{activeStatus},
+        #{openTime},
+        #{closeTime},
+        NOW(),
+        NOW()
+        )
+    </insert>
+
+    <select id="findById" resultType="Room" parameterType="Long">
+        SELECT *
+        FROM room
+        WHERE room_id = #{id}
+        AND active_status='ACTIVE'
+    </select>
+
+    <select id="findRoomInfoById" resultType="RoomInfoResponseDto" parameterType="Long">
+        SELECT
+        room_id as roomId,
+        name as name,
+        capacity as capacity ,
+        open_time as openTime,
+        close_time as closeTime,
+        created_at as createdAt,
+        updated_at as updatedAt
+
+        FROM room
+
+        WHERE room_id= #{id}
+        AND active_status = 'ACTIVE'
+    </select>
+
+    <select id="findRoomList" resultType="RoomListResponseDto">
+        SELECT
+        room_id as roomId,
+        name as name,
+        capacity as capacity ,
+        open_time as openTime,
+        close_time as closeTime,
+        created_at as createdAt,
+        updated_at as updatedAt
+
+        FROM room
+
+        WHERE active_status = 'ACTIVE'
+    </select>
+
+    <update id="softDelete" parameterType="Long">
+        UPDATE room
+        SET active_status = 'INACTIVE'
+        WHERE room_id = #{id}
+    </update>
+
+    <update id="update" parameterType="Map">
+        UPDATE room
+        SET name = #{dto.name} , capacity = #{dto.capacity} , open_time = #{dto.openTime} , close_time = #{dto.closeTime}
+        WHERE room_id = #{id}
+    </update>
+
+
+
+
+</mapper>

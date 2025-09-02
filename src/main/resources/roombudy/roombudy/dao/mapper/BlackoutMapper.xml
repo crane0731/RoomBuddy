@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="roombudy.roombudy.dao.mapper.BlackoutMapper">
+
+    <insert id="save" parameterType="Blackout" useGeneratedKeys="true" keyProperty="blackoutId" >
+
+        INSERT INTO blackout(
+        room_id,
+        scope,
+        reason,
+        start_at,
+        end_at,
+        active_status,
+        created_at,
+        updated_at
+        )
+        VALUES(
+        #{roomId},
+        #{scope},
+        #{reason},
+        #{startAt},
+        #{endAt},
+        #{activeStatus},
+        NOW(),
+        NOW()
+        )
+    </insert>
+
+    <update id="softDelete" parameterType="Long">
+        UPDATE blackout
+        SET active_status = 'INACTIVE'
+        WHERE blackout_id = #{id}
+    </update>
+
+    <select id="findAllByRoomId" resultType="BlackoutListResponseDto" parameterType="Map">
+        SELECT
+        blackout_id as blackoutId,
+        scope as scope,
+        reason as reason,
+        start_at as startAt,
+        end_at as endAt,
+        created_at as createdAt
+
+        FROM blackout
+
+        WHERE room_id = #{roomId}
+        AND active_status= 'ACTIVE'
+    </select>
+
+    <select id="countByRoomId" resultType="Long" parameterType="Long">
+        SELECT COUNT(blackout_id)
+
+        FROM blackout
+
+        WHERE room_id = #{roomId}
+        AND active_status= 'ACTIVE'
+    </select>
+
+    <select id="findBlackoutsByDate" resultType="ReservationSlotDto">
+        SELECT b.start_at as startAt , b.end_at as endAt
+
+        FROM blackout b
+
+        WHERE b.rooms_id = #{roomId}
+        AND DATE(b.start_at) = #{targetDate}
+        AND b.active_status = 'ACTIVE'
+
+        ORDER BY b.start_at
+    </select>
+
+</mapper>

@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="roombudy.roombudy.dao.mapper.ReservationMapper">
+
+    <insert id="save" parameterType="Reservation" useGeneratedKeys="true" keyProperty="reservationId">
+        INSERT INTO reservation(
+        member_id,
+        room_id,
+        status,
+        start_at,
+        end_at,
+        duration,
+        active_status,
+        created_at,
+        updated_at
+        )
+
+        VALUES(
+        #{memberId},
+        #{roomId},
+        #{status},
+        #{startAt},
+        #{endAt},
+        #{duration},
+        #{activeStatus},
+        NOW(),
+        NOW()
+        )
+    </insert>
+
+    <select id="findReservedSlots" resultType="ReservationSlotDto">
+        SELECT rv.start_at as startAt , rv.end_at as endAt
+
+        FROM reservation rv
+
+        WHERE rv.rooms_id = #{roomId}
+        AND DATE(rv.start_at) = #{targetDate}
+        AND rv.status = 'CONFIRMED'
+        AND rv.active_status = 'ACTIVE'
+
+        ORDER BY rv.start_at
+    </select>
+
+    <select id="findOverlappingReservationsForUpdate" resultType="Reservation">
+        SELECT *
+        FROM reservation
+        WHERE room_id = #{roomId}
+        AND active_status = 'ACTIVE'
+        AND status = 'CONFIRMED'
+        AND start_at <![CDATA[ < ]]> #{endAt}
+        AND end_at   <![CDATA[ > ]]> #{startAt}
+        FOR UPDATE
+    </select>
+
+
+    <select id="findById" resultType="Reservation" parameterType="Long">
+        SELECT *
+        FROM reservation
+        WHERE reservation_id = #{id}
+        AND active_status = 'ACTIVE'
+    </select>
+
+    <update id="softDelete" parameterType="Long">
+        UPDATE reservation
+        SET active_status = 'INACTIVE' , status = 'CANCELLED'
+        WHERE reservation_id = #{id}
+    </update>
+
+    <select id="findReservationsByRoomAndDate" resultType="ReservationListResponseDto" parameterType="Map">
+        SELECT
+        rv.reservation_id as reservationId,
+        m.member_id as memberId,
+        m.name as name,
+        m.email as email,
+        rv.start_at as startAt,
+        rv.end_at as endAt,
+        rv.duration as duration,
+        rv.status as status,
+        rv.created_at as createdAt
+
+        FROM reservation rv
+
+        JOIN member m
+        ON rv.member_id = m.member_id
+
+        WHERE rv.active_status = 'ACTIVE'
+        AND rv.status in ('CONFIRMED','COMPLETED')
+        AND rv.room_id = #{roomId}
+        AND DATE(rv.start_at) = #{targetDate}
+
+    </select>
+
+    <select id="findMyReservationByMemberIdAndDate" resultType="MyReservationListResponseDto" parameterType="Long">
+        SELECT
+        rv.reservation_id as reservationId,
+        rv.start_at as startAt,
+        rv.end_at as endAt,
+        rv.duration as duration,
+        rv.status as status,
+        r.room_id  as roomId,
+        r.name as name,
+        rv.created_at as createdAt
+
+        FROM reservation rv
+
+        JOIN room r
+        on rv.room_id = r.room_id
+
+        WHERE rv.active_status = 'ACTIVE'
+        AND rv.member_id = #{memberId}
+        AND rv.start_at >= NOW()
+
+    </select>
+
+    <select id="findAllReservationsByRoomAndCond" resultType="ReservationListResponseDto">
+
+        SELECT
+        rv.reservation_id as reservationId,
+        m.member_id as memberId,
+        m.name as name,
+        m.email as email,
+        rv.start_at as startAt,
+        rv.end_at as endAt,
+        rv.duration as duration,
+        rv.status as status,
+        rv.created_at as createdAt
+
+        FROM reservation rv
+
+        JOIN member m
+        ON rv.member_id = m.member_id
+
+        <where>
+            rv.room_id = #{roomId}
+            AND rv.active_status = 'ACTIVE'
+
+            <if test="cond.memberEmail != null  and cond.memberEmail !=''">
+                AND m.email = #{cond.memberEmail}
+            </if>
+
+            <if test="cond.status != null">
+                AND rv.status = #{cond.status}
+            </if>
+
+            <if test="cond.date != null">
+                AND DATE(rv.start_at) = #{cond.date}
+            </if>
+        </where>
+
+        ORDER BY rv.created_at
+        <choose>
+            <when test="cond.created == 'ASC'">ASC</when>
+            <otherwise>DESC</otherwise>
+        </choose>
+
+        LIMIT #{limit} OFFSET #{offset}
+
+    </select>
+
+    <select id="countByRoomAndCond" resultType="Long" parameterType="SearchReservationCondDto">
+        SELECT COUNT(rv.reservation_id)
+
+        FROM reservation rv
+
+        JOIN member m
+        ON rv.member_id = m.member_id
+
+        <where>
+            rv.room_id = #{roomId}
+            AND rv.active_status = 'ACTIVE'
+
+            <if test="cond.memberEmail != null  and cond.memberEmail !=''">
+                AND m.email = #{cond.memberEmail}
+            </if>
+
+            <if test="cond.status != null">
+                AND rv.status = #{cond.status}
+            </if>
+
+            <if test="cond.date != null">
+                AND DATE(rv.start_at) = #{cond.date}
+            </if>
+        </where>
+
+    </select>
+
+    <select id="findConfirmedReservationByRoom" resultType="ReservationListResponseDto">
+        SELECT
+        rv.reservation_id as reservationId,
+        m.member_id as memberId,
+        m.name as name,
+        m.email as email,
+        rv.start_at as startAt,
+        rv.end_at as endAt,
+        rv.duration as duration,
+        rv.status as status,
+        rv.created_at as createdAt
+
+        FROM reservation rv
+
+        JOIN member m
+        ON rv.member_id = m.member_id
+        
+        <where>
+            rv.active_status = 'ACTIVE'
+            AND rv.status = 'CONFIRMED'
+            
+            <if test="roomId != null">
+                AND rv.room_id = #{roomId}
+            </if>
+
+        </where>
+
+        LIMIT #{limit} OFFSET #{offset}
+
+    </select>
+
+    <select id="countByRoom" resultType="Long" parameterType="Long">
+        SELECT COUNT(rv.reservation_id)
+
+        FROM reservation rv
+
+        JOIN member m
+        ON rv.member_id = m.member_id
+
+        <where>
+            rv.active_status = 'ACTIVE'
+            AND rv.status = 'CONFIRMED'
+
+            <if test="roomId != null">
+                AND rv.room_id = #{roomId}
+            </if>
+        </where>
+    </select>
+
+
+    <select id="findTodayConfirmedReservation" resultType="Reservation">
+        SELECT *
+        FROM reservation
+        WHERE active_status= 'ACTIVE'
+        AND status='CONFIRMED'
+        AND end_at <![CDATA[ < ]]> NOW()
+
+    </select>
+
+    <update id="updateStatusForCompleted" parameterType="Long">
+        UPDATE reservation
+        SET status = 'COMPLETED'
+        WHERE reservation_id = #{id}
+        AND active_status='ACTIVE'
+
+    </update>
+
+</mapper>
