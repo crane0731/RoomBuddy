@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import roombudy.roombudy.dao.mapper.BlackoutMapper;
+import roombudy.roombudy.dao.mapper.ReservationMapper;
 import roombudy.roombudy.domain.Blackout;
+import roombudy.roombudy.domain.Reservation;
 import roombudy.roombudy.domain.Room;
 import roombudy.roombudy.dto.api.PagedResponseDto;
 import roombudy.roombudy.dto.blackout.BlackoutDto;
@@ -31,6 +33,7 @@ public class BlackoutService {
     private final RoomService roomService;//스터디룸 서비스
 
     private final BlackoutMapper blackoutMapper;//블랙 아웃 매퍼
+    private final ReservationMapper reservationMapper; //예약 매퍼
 
 
 
@@ -55,6 +58,13 @@ public class BlackoutService {
             validateExistsRoom(room);
 
             blackout.settingRoom(room.getRoomId());
+
+        }
+
+        //블랙 아웃 시간에 이미 진행중인 예약이 있는지 확인 하고 모두 삭제 처리(SOFT DELETE)
+        List<Reservation> overlappingReservations = reservationMapper.findOverlappingReservations(dto.getStartAt(), dto.getEndAt());
+        for (Reservation overlappingReservation : overlappingReservations) {
+            reservationMapper.save(overlappingReservation);
         }
 
         //블랙 아웃 저장

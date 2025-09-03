@@ -42,6 +42,15 @@
         ORDER BY rv.start_at
     </select>
 
+    <select id="findOverlappingReservations" resultType="Reservation">
+        SELECT *
+        FROM reservation
+        WHERE active_status = 'ACTIVE'
+        AND status = 'CONFIRMED'
+        AND start_at <![CDATA[ < ]]> #{endAt}
+        AND end_at   <![CDATA[ > ]]> #{startAt}
+    </select>
+
     <select id="findOverlappingReservationsForUpdate" resultType="Reservation">
         SELECT *
         FROM reservation

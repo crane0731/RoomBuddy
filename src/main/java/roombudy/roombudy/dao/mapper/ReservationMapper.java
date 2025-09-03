@@ -26,6 +26,10 @@ public interface ReservationMapper {
 
     List<Reservation> findOverlappingReservationsForUpdate(@Param("roomId") Long roomId, @Param("startAt") LocalDateTime startAt, @Param("endAt") LocalDateTime endAt);
 
+    List<Reservation> findOverlappingReservations(@Param("startAt") LocalDateTime startAt, @Param("endAt") LocalDateTime endAt);
+
+
+
     Optional<Reservation> findById(@Param("id") Long id);
 
     void softDelete(Long id);
@@ -46,4 +50,7 @@ public interface ReservationMapper {
     List<Reservation> findTodayConfirmedReservation();
 
     void updateStatusForCompleted(Long id);
+
+
+
 }
