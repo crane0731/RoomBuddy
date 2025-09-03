@@ -3,6 +3,7 @@ package roombudy.roombudy.config.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -74,6 +75,13 @@ public class WebSecurityConfig {
                                 "api/roombuddy/rooms"
                         )
                         .permitAll()
+
+                        .requestMatchers(HttpMethod.GET,
+                                "/api/roombuddy/reservation/**",
+                                "/api/roombuddy/blackout/rooms/{id}/today"
+                                )
+                        .permitAll()
+
                         .requestMatchers("/api/roombuddy/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )

@@ -3,11 +3,9 @@ package roombudy.roombudy.controller.reservation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.member.UpdateMemberPasswordRequestDto;
 import roombudy.roombudy.dto.reservation.CreateReservationRequestDto;
 import roombudy.roombudy.service.reservation.ReservationService;
 import roombudy.roombudy.utils.ErrorCheckUtil;
@@ -33,7 +31,7 @@ public class ReservationController {
      * @param bindingResult 에러메시지를 바인딩 할 객체
      * @return 성공 메시지
      */
-    @PostMapping("/room/{id}")
+    @PostMapping("/rooms/{id}")
     public ResponseEntity<ApiResponseDto<?>> createReservation(@PathVariable("id")Long id, @Valid @RequestBody CreateReservationRequestDto requestDto, BindingResult bindingResult) {
         // 오류 메시지를 담을 Map
         Map<String, String> errorMessages = new HashMap<>();
@@ -67,7 +65,7 @@ public class ReservationController {
      * @param id 스터디룸 아이디
      * @return List<ReservationListResponseDto>
      */
-    @GetMapping("/room/{id}")
+    @GetMapping("/rooms/{id}")
     public ResponseEntity<ApiResponseDto<?>> getTodayReservation(@PathVariable("id")Long id){
 
         return ResponseEntity.ok(ApiResponseDto.success(reservationService.getReservationsByRoomAndDate(id)));

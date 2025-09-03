@@ -57,7 +57,7 @@
         AND active_status= 'ACTIVE'
     </select>
 
-    <select id="findBlackoutsByDate" resultType="ReservationSlotDto">
+    <select id="findBlackoutsByDate" resultType="BlackoutDto">
         SELECT b.start_at as startAt , b.end_at as endAt
 
         FROM blackout b

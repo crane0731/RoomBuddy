@@ -7,6 +7,7 @@ import roombudy.roombudy.dao.mapper.BlackoutMapper;
 import roombudy.roombudy.domain.Blackout;
 import roombudy.roombudy.domain.Room;
 import roombudy.roombudy.dto.api.PagedResponseDto;
+import roombudy.roombudy.dto.blackout.BlackoutDto;
 import roombudy.roombudy.dto.blackout.BlackoutListResponseDto;
 import roombudy.roombudy.dto.blackout.CreateBlackoutRequestDto;
 import roombudy.roombudy.enums.ActiveStatus;
@@ -15,6 +16,7 @@ import roombudy.roombudy.exception.ErrorMessage;
 import roombudy.roombudy.exception.RoomCustomException;
 import roombudy.roombudy.service.room.RoomService;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -89,7 +91,20 @@ public class BlackoutService {
     }
 
     /**
+     * 특정 스터디룸의 오늘 블랙 아웃 목록 조회
+     * @param roomId 스터디룸 아이디
+     * @return List<BlackoutDto>
+     */
+    public List<BlackoutDto> getTodayBlackoutsByRoom(Long roomId){
+        LocalDate today = LocalDate.now();
+
+        return blackoutMapper.findBlackoutsByDate(roomId,today);
+    }
+
+
+    /**
      * [서비스 로직]
+     * 주어진 시간과 겹치는 블랙 아웃 목록 조회
      * @param roomId 스터디룸 아이디
      * @param startAt 시작 시각
      * @param endAt 종료 시각

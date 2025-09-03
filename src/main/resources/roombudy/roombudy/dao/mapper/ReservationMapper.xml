@@ -63,7 +63,7 @@
 
     <update id="softDelete" parameterType="Long">
         UPDATE reservation
-        SET active_status = 'INACTIVE' , status = 'CANCELLED'
+        SET active_status = 'INACTIVE' , status = 'CANCELED'
         WHERE reservation_id = #{id}
     </update>
 
