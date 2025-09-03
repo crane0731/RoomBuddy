@@ -1,6 +1,7 @@
 package roombudy.roombudy.controller.admin.blackout;
 
 import jakarta.validation.Valid;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -65,13 +66,28 @@ public class AdminBlackoutController {
 
     /**
      * [컨트롤러]
+     * 관리자 - 특정 스터디룸에 대한 블랙 아웃 목록 조회
+     * @param id 스터디룸 아이디
+     * @param page 페이지 번호
+     * @return PagedResponseDto<BlackoutListResponseDto>
+     */
+    @GetMapping("/rooms/{id}")
+    public ResponseEntity<ApiResponseDto<?>> getBlackoutsByRoom(@PathVariable("id") Long id,
+                                                                @RequestParam(value = "page", defaultValue = "0") int page
+                                                                ) {
+        return ResponseEntity.ok(ApiResponseDto.success(blackoutService.getBlackoutsByRoom(id,page)));
+
+    }
+
+    /**
+     * [컨트롤러]
      * 관리자 - 현재 진행중인& 예정인 블랙 아웃 목록 조회
      * @param page 페이지 번호
      * @return PagedResponseDto<BlackoutListResponseDto>
      */
     @GetMapping("")
     public ResponseEntity<ApiResponseDto<?>> getBlackoutsByRoom(@RequestParam(value = "page", defaultValue = "0") int page
-                                                                ) {
+    ) {
         return ResponseEntity.ok(ApiResponseDto.success(blackoutService.getActiveBlackoutsByRoom(page)));
 
     }

@@ -60,6 +60,30 @@
     </select>
 
 
+    <select id="findAllByRoomId" resultType="BlackoutListResponseDto" parameterType="Map">
+        SELECT
+        blackout_id as blackoutId,
+        scope as scope,
+        reason as reason,
+        start_at as startAt,
+        end_at as endAt,
+        created_at as createdAt
+
+        FROM blackout
+
+        WHERE room_id = #{roomId}
+        AND active_status= 'ACTIVE'
+    </select>
+
+    <select id="countByRoomId" resultType="Long" parameterType="Long">
+        SELECT COUNT(blackout_id)
+
+        FROM blackout
+
+        WHERE room_id = #{roomId}
+        AND active_status= 'ACTIVE'
+    </select>
+
     <select id="findBlackoutsByDate" resultType="BlackoutDto">
         SELECT b.start_at as startAt , b.end_at as endAt
 

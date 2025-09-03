@@ -91,6 +91,24 @@ public class BlackoutService {
 
     /**
      * [서비스 로직]
+     * 관리자 - 특정 스터디룸의 블랙아웃 목록 조회
+     * @param roomId 스터디룸 아이디
+     * @param page 페이지 번호
+     * @return PagedResponseDto<BlackoutListResponseDto>
+     */
+    public PagedResponseDto<BlackoutListResponseDto> getBlackoutsByRoom(Long roomId,int page){
+
+        List<BlackoutListResponseDto> content = blackoutMapper.findAllByRoomId(roomId,page, 10);
+
+        Long total = blackoutMapper.countByRoomId(roomId);
+
+        return createPagedResponseDto(content,total,page,10);
+    }
+
+
+
+    /**
+     * [서비스 로직]
      * 특정 스터디룸의 오늘 블랙 아웃 목록 조회
      * @param roomId 스터디룸 아이디
      * @return List<BlackoutDto>

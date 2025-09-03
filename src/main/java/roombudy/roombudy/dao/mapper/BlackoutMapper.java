@@ -26,6 +26,10 @@ public interface BlackoutMapper {
 
     Long countActiveBlackouts();
 
+    List<BlackoutListResponseDto> findAllByRoomId(@Param("roomId")Long roomId,@Param("offset") int offset, @Param("limit") int limit);
+
+
+    Long countByRoomId(Long roomId);
 
     List<BlackoutDto> findBlackoutsByDate(@Param("roomId") Long roomId, @Param("targetDate") LocalDate targetDate);
 
