@@ -15,6 +15,7 @@ import roombudy.roombudy.exception.ErrorMessage;
 import roombudy.roombudy.exception.RoomCustomException;
 import roombudy.roombudy.service.room.RoomService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -85,6 +86,17 @@ public class BlackoutService {
         Long total = blackoutMapper.countByRoomId(roomId);
 
         return createPagedResponseDto(content,total,page,10);
+    }
+
+    /**
+     * [서비스 로직]
+     * @param roomId 스터디룸 아이디
+     * @param startAt 시작 시각
+     * @param endAt 종료 시각
+     * @return List<Blackout>
+     */
+    public List<Blackout> getOverlappingBlackouts(Long roomId, LocalDateTime startAt, LocalDateTime endAt){
+        return blackoutMapper.findOverlappingBlackouts(roomId, startAt, endAt);
     }
 
     //==페이징 응답 DTO 생성==//

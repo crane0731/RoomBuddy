@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/roombudy/admin/rooms")
+@RequestMapping("/api/roombuddy/admin/rooms")
 public class AdminRoomController {
 
     private final AdminRoomService adminRoomService;//관리자 스터디룸 서비스

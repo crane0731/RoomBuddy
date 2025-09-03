@@ -15,7 +15,7 @@ import java.util.Map;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/roombudy/admin/members")
+@RequestMapping("/api/roombuddy/admin/members")
 public class AdminMemberController {
 
 

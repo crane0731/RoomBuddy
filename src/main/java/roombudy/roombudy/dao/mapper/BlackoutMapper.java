@@ -2,12 +2,14 @@ package roombudy.roombudy.dao.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 import roombudy.roombudy.domain.Blackout;
 import roombudy.roombudy.dto.blackout.BlackoutDto;
 import roombudy.roombudy.dto.blackout.BlackoutListResponseDto;
 
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -27,4 +29,7 @@ public interface BlackoutMapper {
     Long countByRoomId(Long roomId);
 
     List<BlackoutDto> findBlackoutsByDate(@Param("roomId") Long roomId, @Param("targetDate") LocalDate targetDate);
+
+    List<Blackout>findOverlappingBlackouts(@Param("roomId")Long roomId, @Param("startAt")LocalDateTime startAt, @Param("endAt")LocalDateTime endAt);
+
 }

@@ -34,7 +34,7 @@
 
         FROM reservation rv
 
-        WHERE rv.rooms_id = #{roomId}
+        WHERE rv.room_id = #{roomId}
         AND DATE(rv.start_at) = #{targetDate}
         AND rv.status = 'CONFIRMED'
         AND rv.active_status = 'ACTIVE'

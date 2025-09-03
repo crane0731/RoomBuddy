@@ -19,7 +19,7 @@ import java.util.Map;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/roombudy/admin/blackout")
+@RequestMapping("/api/roombuddy/admin/blackout")
 public class AdminBlackoutController {
 
     private final BlackoutService blackoutService;//블랙 아웃 서비스

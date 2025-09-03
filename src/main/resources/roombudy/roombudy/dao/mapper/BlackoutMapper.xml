@@ -62,11 +62,21 @@
 
         FROM blackout b
 
-        WHERE b.rooms_id = #{roomId}
+        WHERE b.room_id = #{roomId}
         AND DATE(b.start_at) = #{targetDate}
         AND b.active_status = 'ACTIVE'
 
         ORDER BY b.start_at
+    </select>
+
+    <select id="findOverlappingBlackouts" resultType="Blackout">
+        SELECT *
+        FROM blackout b
+        WHERE b.room_id = #{roomId}
+        AND b.active_status = 'ACTIVE'
+        AND (
+        (b.start_at <![CDATA[ < ]]> #{endAt} AND b.end_at > #{startAt})
+        )
     </select>
 
 </mapper>

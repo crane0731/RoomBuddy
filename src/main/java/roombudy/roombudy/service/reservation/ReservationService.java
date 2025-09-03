@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import roombudy.roombudy.dao.mapper.ReservationMapper;
+import roombudy.roombudy.domain.Blackout;
 import roombudy.roombudy.domain.Reservation;
 import roombudy.roombudy.domain.Room;
 import roombudy.roombudy.dto.api.PagedResponseDto;
@@ -14,6 +15,7 @@ import roombudy.roombudy.dto.reservation.ReservationListResponseDto;
 import roombudy.roombudy.dto.reservation.SearchReservationCondDto;
 import roombudy.roombudy.exception.ErrorMessage;
 import roombudy.roombudy.exception.ReservationCustomException;
+import roombudy.roombudy.service.blackout.BlackoutService;
 import roombudy.roombudy.service.member.MemberService;
 import roombudy.roombudy.service.room.RoomService;
 
@@ -32,6 +34,7 @@ public class ReservationService {
 
     private final MemberService memberService;//회원 서비스
     private final RoomService roomService;//스터디 룸 서비스
+    private final BlackoutService blackoutService;//블랙 아웃 서비스
     private final ReservationMapper reservationMapper;//예약 매퍼
 
 
@@ -57,6 +60,12 @@ public class ReservationService {
         List<Reservation> conflicts = reservationMapper.findOverlappingReservationsForUpdate(roomId, startAt, endAt);
         if(!conflicts.isEmpty()){
             throw new ReservationCustomException(ErrorMessage.ALREADY_RESERVED);
+        }
+
+        //블랙 아웃 확인
+        List<Blackout> blackouts = blackoutService.getOverlappingBlackouts(roomId, startAt, endAt);
+        if (!blackouts.isEmpty()) {
+            throw new ReservationCustomException(ErrorMessage.BLACKOUT_TIME);
         }
 
         Reservation reservation = Reservation.create(memberId, room.getRoomId(), startAt, endAt, dto.getDuration());

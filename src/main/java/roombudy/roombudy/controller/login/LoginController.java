@@ -27,7 +27,7 @@ import java.util.Map;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/roombudy/auth")
+@RequestMapping("/api/roombuddy/auth")
 public class LoginController {
 
     private final LoginService loginService;//로그인 서비스

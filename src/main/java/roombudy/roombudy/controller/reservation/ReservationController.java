@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/roombudy/reservation")
+@RequestMapping("/api/roombuddy/reservation")
 public class ReservationController {
 
     private final ReservationService reservationService;//예약 서비스

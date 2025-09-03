@@ -16,7 +16,7 @@ import roombudy.roombudy.service.token.TokenService;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/roombudy/auth")
+@RequestMapping("/api/roombuddy/auth")
 public class TokenApiController {
 
     private final TokenService tokenService; // 토큰 서비스

@@ -27,6 +27,7 @@ public class ReservationScheduledService {
     /**
      * 매일 09시 ~ 22시 사이 1시간마다 정각에 실행
      */
+    @Transactional
     @Scheduled(cron = "0 0 9-22 * * *")
     public void completedReservation() {
         log.info("스케쥴러 시작됨");

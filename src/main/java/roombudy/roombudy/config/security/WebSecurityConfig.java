@@ -69,11 +69,12 @@ public class WebSecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))  // Stateless 모드
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/roombudy/auth/signup/**","/api/roombudy/auth/login",
-                                "/static/***","/profile-images/**","/test.html","/api/auth/**"
+                        .requestMatchers("/api/roombuddy/auth/signup/**","/api/roombuddy/auth/login",
+                                "/static/***","/profile-images/**","/test.html","/api/auth/**",
+                                "api/roombuddy/rooms"
                         )
                         .permitAll()
-                        .requestMatchers("/api/roombudy/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/roombuddy/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(tokenAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);  // JWT 필터 추가

@@ -15,8 +15,6 @@ public final class ErrorMessage {
     public static final String LOGOUT_TOKEN = "로그아웃 된 토큰입니다.";
     public static final String ALREADY_LOGOUT_MEMBER = "이미 로그아웃된 회원입니다.";
     public static final String FAILED_VALIDATE_EMAIL="이메일 인증에 실패했습니다.";
-    public static final String INCORRECT_PASSWORD = "잘못된 비밀번호입니다.";
-    public static final String ALREADY_SUSPENDED_MEMBER = "이미 정지된 회원입니다.";
     public static final String NO_PERMISSION = "권한이 없습니다.";
 
     /**
@@ -32,4 +30,8 @@ public final class ErrorMessage {
     public static final String NOT_FOUND_RESERVATION = "예약 찾을 수 없습니다.";
     public static final String ALREADY_RESERVED = "이미 예약된 자리입니다.";
 
+    /**
+     * 블랙 아웃
+     */
+    public static final String BLACKOUT_TIME = "블랙 아웃된 시간 입니다.";
 }
