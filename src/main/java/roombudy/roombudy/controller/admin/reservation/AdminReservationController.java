@@ -46,7 +46,7 @@ public class AdminReservationController {
      * @param page 페이지 번호
      * @return PagedResponseDto<ReservationListResponseDto>
      */
-    @GetMapping("/room/{id}")
+    @GetMapping("/rooms/{id}")
     public ResponseEntity<ApiResponseDto<?>> getAllReservationsByRoomAndCond(@PathVariable("id")Long id,
                                                                              @RequestParam(value = "memberEmail",required = false) String memberEmail,
                                                                              @RequestParam(value = "status",required = false)ReservationStatus status,

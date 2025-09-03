@@ -172,9 +172,9 @@
         UPDATE member
         SET active_status = 'INACTIVE'
         , name = '삭제된 회원 이름'
-        , email = '삭제된 회원 이메일'
-        , password ='삭제된 회원 비밀번호'
-        , phone ='삭제된 회원 전화번호'
+        , email = null
+        , password = null
+        , phone = null
         WHERE member_id=#{id}
         AND active_status='ACTIVE'
     </update>

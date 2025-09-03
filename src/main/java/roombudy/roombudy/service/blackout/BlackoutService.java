@@ -76,21 +76,21 @@ public class BlackoutService {
 
     /**
      * [서비스 로직]
-     * 관리자 - 특정 스터디룸의 블랙 아웃 목록 조회
-     * @param roomId 룸 아이디
+     * * 관리자 - 현재 진행중인& 예정인 블랙 아웃 목록 조회
      * @param page 페이지 번호
      * @return PagedResponseDto<BlackoutListResponseDto>
      */
-    public PagedResponseDto<BlackoutListResponseDto> getBlackoutsByRoom(Long roomId, int page){
+    public PagedResponseDto<BlackoutListResponseDto> getActiveBlackoutsByRoom(int page){
 
-        List<BlackoutListResponseDto> content = blackoutMapper.findAllByRoomId(roomId, page, 10);
+        List<BlackoutListResponseDto> content = blackoutMapper.findActiveBlackouts(page, 10);
 
-        Long total = blackoutMapper.countByRoomId(roomId);
+        Long total = blackoutMapper.countActiveBlackouts();
 
         return createPagedResponseDto(content,total,page,10);
     }
 
     /**
+     * [서비스 로직]
      * 특정 스터디룸의 오늘 블랙 아웃 목록 조회
      * @param roomId 스터디룸 아이디
      * @return List<BlackoutDto>

@@ -33,7 +33,7 @@
         WHERE blackout_id = #{id}
     </update>
 
-    <select id="findAllByRoomId" resultType="BlackoutListResponseDto" parameterType="Map">
+    <select id="findActiveBlackouts" resultType="BlackoutListResponseDto">
         SELECT
         blackout_id as blackoutId,
         scope as scope,
@@ -44,18 +44,21 @@
 
         FROM blackout
 
-        WHERE room_id = #{roomId}
-        AND active_status= 'ACTIVE'
+        WHERE active_status = 'ACTIVE'
+        AND end_at <![CDATA[ >= ]]> NOW()
     </select>
 
-    <select id="countByRoomId" resultType="Long" parameterType="Long">
+
+    <select id="countActiveBlackouts" resultType="Long">
         SELECT COUNT(blackout_id)
 
         FROM blackout
 
-        WHERE room_id = #{roomId}
-        AND active_status= 'ACTIVE'
+        WHERE active_status = 'ACTIVE'
+        AND end_at <![CDATA[ >= ]]> NOW()
+
     </select>
+
 
     <select id="findBlackoutsByDate" resultType="BlackoutDto">
         SELECT b.start_at as startAt , b.end_at as endAt

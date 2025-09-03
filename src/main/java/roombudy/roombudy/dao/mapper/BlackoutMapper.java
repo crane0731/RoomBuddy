@@ -22,11 +22,10 @@ public interface BlackoutMapper {
 
     void softDelete(Long id);
 
+    List<BlackoutListResponseDto> findActiveBlackouts(@Param("offset") int offset, @Param("limit") int limit);
 
-    List<BlackoutListResponseDto> findAllByRoomId(@Param("roomId")Long roomId,@Param("offset") int offset, @Param("limit") int limit);
+    Long countActiveBlackouts();
 
-
-    Long countByRoomId(Long roomId);
 
     List<BlackoutDto> findBlackoutsByDate(@Param("roomId") Long roomId, @Param("targetDate") LocalDate targetDate);
 
