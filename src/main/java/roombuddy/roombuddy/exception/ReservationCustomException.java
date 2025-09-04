@@ -1,4 +1,4 @@
-package roombudy.roombudy.exception;
+package roombuddy.roombuddy.exception;
 
 public class ReservationCustomException extends RuntimeException {
     public ReservationCustomException(String message) {

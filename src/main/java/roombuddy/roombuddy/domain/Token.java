@@ -1,10 +1,10 @@
-package roombudy.roombudy.domain;
+package roombuddy.roombuddy.domain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import roombudy.roombudy.enums.ActiveStatus;
+import roombuddy.roombuddy.enums.ActiveStatus;
 
 import java.time.LocalDateTime;
 

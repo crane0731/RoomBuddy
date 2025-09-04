@@ -1,4 +1,4 @@
-package roombudy.roombudy.config.jwt;
+package roombuddy.roombuddy.config.jwt;
 
 import lombok.Getter;
 import lombok.Setter;

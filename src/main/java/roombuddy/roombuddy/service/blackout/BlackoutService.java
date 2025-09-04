@@ -1,22 +1,22 @@
-package roombudy.roombudy.service.blackout;
+package roombuddy.roombuddy.service.blackout;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.dao.mapper.BlackoutMapper;
-import roombudy.roombudy.dao.mapper.ReservationMapper;
-import roombudy.roombudy.domain.Blackout;
-import roombudy.roombudy.domain.Reservation;
-import roombudy.roombudy.domain.Room;
-import roombudy.roombudy.dto.api.PagedResponseDto;
-import roombudy.roombudy.dto.blackout.BlackoutDto;
-import roombudy.roombudy.dto.blackout.BlackoutListResponseDto;
-import roombudy.roombudy.dto.blackout.CreateBlackoutRequestDto;
-import roombudy.roombudy.enums.ActiveStatus;
-import roombudy.roombudy.enums.Scope;
-import roombudy.roombudy.exception.ErrorMessage;
-import roombudy.roombudy.exception.RoomCustomException;
-import roombudy.roombudy.service.room.RoomService;
+import roombuddy.roombuddy.dao.mapper.BlackoutMapper;
+import roombuddy.roombuddy.dao.mapper.ReservationMapper;
+import roombuddy.roombuddy.domain.Blackout;
+import roombuddy.roombuddy.domain.Reservation;
+import roombuddy.roombuddy.domain.Room;
+import roombuddy.roombuddy.dto.api.PagedResponseDto;
+import roombuddy.roombuddy.dto.blackout.BlackoutDto;
+import roombuddy.roombuddy.dto.blackout.BlackoutListResponseDto;
+import roombuddy.roombuddy.dto.blackout.CreateBlackoutRequestDto;
+import roombuddy.roombuddy.enums.ActiveStatus;
+import roombuddy.roombuddy.enums.Scope;
+import roombuddy.roombuddy.exception.ErrorMessage;
+import roombuddy.roombuddy.exception.RoomCustomException;
+import roombuddy.roombuddy.service.room.RoomService;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

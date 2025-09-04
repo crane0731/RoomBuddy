@@ -1,10 +1,10 @@
-package roombudy.roombudy.controller.blackout;
+package roombuddy.roombuddy.controller.blackout;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.service.blackout.BlackoutService;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.service.blackout.BlackoutService;
 
 /**
  *블랙 아웃 컨트롤러

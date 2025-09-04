@@ -1,4 +1,4 @@
-package roombudy.roombudy.controller.room;
+package roombuddy.roombuddy.controller.room;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -6,11 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.room.RoomListResponseDto;
-import roombudy.roombudy.service.room.RoomService;
-
-import java.util.List;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.service.room.RoomService;
 
 /**
  * 스터디룸 컨트롤러

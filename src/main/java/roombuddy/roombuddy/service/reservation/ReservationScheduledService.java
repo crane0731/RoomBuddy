@@ -1,16 +1,14 @@
-package roombudy.roombudy.service.reservation;
+package roombuddy.roombuddy.service.reservation;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.dao.mapper.ReservationMapper;
-import roombudy.roombudy.domain.Reservation;
-import roombudy.roombudy.enums.ReservationStatus;
+import roombuddy.roombuddy.dao.mapper.ReservationMapper;
+import roombuddy.roombuddy.domain.Reservation;
+import roombuddy.roombuddy.enums.ReservationStatus;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 /**

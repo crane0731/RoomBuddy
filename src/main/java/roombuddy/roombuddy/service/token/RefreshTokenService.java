@@ -1,15 +1,15 @@
-package roombudy.roombudy.service.token;
+package roombuddy.roombuddy.service.token;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.config.jwt.TokenProvider;
-import roombudy.roombudy.dao.mapper.TokenMapper;
-import roombudy.roombudy.domain.Member;
-import roombudy.roombudy.domain.Token;
-import roombudy.roombudy.enums.TokenType;
-import roombudy.roombudy.exception.ErrorMessage;
-import roombudy.roombudy.exception.JwtCustomException;
+import roombuddy.roombuddy.config.jwt.TokenProvider;
+import roombuddy.roombuddy.dao.mapper.TokenMapper;
+import roombuddy.roombuddy.domain.Member;
+import roombuddy.roombuddy.domain.Token;
+import roombuddy.roombuddy.enums.TokenType;
+import roombuddy.roombuddy.exception.ErrorMessage;
+import roombuddy.roombuddy.exception.JwtCustomException;
 
 import java.time.Duration;
 import java.util.List;

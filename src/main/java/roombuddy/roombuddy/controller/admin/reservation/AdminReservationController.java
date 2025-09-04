@@ -1,13 +1,13 @@
-package roombudy.roombudy.controller.admin.reservation;
+package roombuddy.roombuddy.controller.admin.reservation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.reservation.SearchReservationCondDto;
-import roombudy.roombudy.enums.CreatedType;
-import roombudy.roombudy.enums.ReservationStatus;
-import roombudy.roombudy.service.admin.reservation.AdminReservationService;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.dto.reservation.SearchReservationCondDto;
+import roombuddy.roombuddy.enums.CreatedType;
+import roombuddy.roombuddy.enums.ReservationStatus;
+import roombuddy.roombuddy.service.admin.reservation.AdminReservationService;
 
 import java.time.LocalDate;
 import java.util.Map;

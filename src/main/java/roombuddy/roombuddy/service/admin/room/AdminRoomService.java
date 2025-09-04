@@ -1,13 +1,12 @@
-package roombudy.roombudy.service.admin.room;
+package roombuddy.roombuddy.service.admin.room;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.domain.Room;
-import roombudy.roombudy.dto.room.CreateRoomRequestDto;
-import roombudy.roombudy.dto.room.RoomInfoResponseDto;
-import roombudy.roombudy.dto.room.UpdateRoomRequestDto;
-import roombudy.roombudy.service.room.RoomService;
+import roombuddy.roombuddy.domain.Room;
+import roombuddy.roombuddy.dto.room.CreateRoomRequestDto;
+import roombuddy.roombuddy.dto.room.UpdateRoomRequestDto;
+import roombuddy.roombuddy.service.room.RoomService;
 
 /**
  * 관리자 스터디룸 서비스

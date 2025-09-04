@@ -1,4 +1,4 @@
-package roombudy.roombudy.enums;
+package roombuddy.roombuddy.enums;
 
 /**
  * 생성일 정렬 타입

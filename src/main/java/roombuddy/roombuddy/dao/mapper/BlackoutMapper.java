@@ -1,11 +1,10 @@
-package roombudy.roombudy.dao.mapper;
+package roombuddy.roombuddy.dao.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.core.parameters.P;
-import roombudy.roombudy.domain.Blackout;
-import roombudy.roombudy.dto.blackout.BlackoutDto;
-import roombudy.roombudy.dto.blackout.BlackoutListResponseDto;
+import roombuddy.roombuddy.domain.Blackout;
+import roombuddy.roombuddy.dto.blackout.BlackoutDto;
+import roombuddy.roombuddy.dto.blackout.BlackoutListResponseDto;
 
 
 import java.time.LocalDate;

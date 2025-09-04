@@ -1,4 +1,4 @@
-package roombudy.roombudy.dto.room;
+package roombuddy.roombuddy.dto.room;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

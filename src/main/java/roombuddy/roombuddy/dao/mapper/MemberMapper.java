@@ -1,11 +1,11 @@
-package roombudy.roombudy.dao.mapper;
+package roombuddy.roombuddy.dao.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import roombudy.roombudy.domain.Member;
-import roombudy.roombudy.dto.member.MemberInfoResponseDto;
-import roombudy.roombudy.dto.member.MemberListResponseDto;
-import roombudy.roombudy.dto.member.SearchMemberCondDto;
+import roombuddy.roombuddy.domain.Member;
+import roombuddy.roombuddy.dto.member.MemberInfoResponseDto;
+import roombuddy.roombuddy.dto.member.MemberListResponseDto;
+import roombuddy.roombuddy.dto.member.SearchMemberCondDto;
 
 import java.util.List;
 import java.util.Optional;

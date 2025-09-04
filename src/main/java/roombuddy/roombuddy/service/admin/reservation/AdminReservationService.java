@@ -1,12 +1,12 @@
-package roombudy.roombudy.service.admin.reservation;
+package roombuddy.roombuddy.service.admin.reservation;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.dto.api.PagedResponseDto;
-import roombudy.roombudy.dto.reservation.ReservationListResponseDto;
-import roombudy.roombudy.dto.reservation.SearchReservationCondDto;
-import roombudy.roombudy.service.reservation.ReservationService;
+import roombuddy.roombuddy.dto.api.PagedResponseDto;
+import roombuddy.roombuddy.dto.reservation.ReservationListResponseDto;
+import roombuddy.roombuddy.dto.reservation.SearchReservationCondDto;
+import roombuddy.roombuddy.service.reservation.ReservationService;
 
 
 /**

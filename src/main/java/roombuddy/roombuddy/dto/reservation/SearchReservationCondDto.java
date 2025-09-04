@@ -1,9 +1,9 @@
-package roombudy.roombudy.dto.reservation;
+package roombuddy.roombuddy.dto.reservation;
 
 import lombok.Getter;
 import lombok.Setter;
-import roombudy.roombudy.enums.CreatedType;
-import roombudy.roombudy.enums.ReservationStatus;
+import roombuddy.roombuddy.enums.CreatedType;
+import roombuddy.roombuddy.enums.ReservationStatus;
 
 import java.time.LocalDate;
 

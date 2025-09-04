@@ -1,4 +1,4 @@
-package roombudy.roombudy.controller.login;
+package roombuddy.roombuddy.controller.login;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -9,15 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.login.LoginRequestDto;
-import roombudy.roombudy.dto.login.SendEmailRequestDto;
-import roombudy.roombudy.dto.login.SignUpRequestDto;
-import roombudy.roombudy.dto.login.ValidateEmailCodeRequestDto;
-import roombudy.roombudy.dto.token.TokenResponseDto;
-import roombudy.roombudy.service.email.EmailCodeService;
-import roombudy.roombudy.service.login.LoginService;
-import roombudy.roombudy.utils.ErrorCheckUtil;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.dto.login.LoginRequestDto;
+import roombuddy.roombuddy.dto.login.SendEmailRequestDto;
+import roombuddy.roombuddy.dto.login.SignUpRequestDto;
+import roombuddy.roombuddy.dto.login.ValidateEmailCodeRequestDto;
+import roombuddy.roombuddy.dto.token.TokenResponseDto;
+import roombuddy.roombuddy.service.email.EmailCodeService;
+import roombuddy.roombuddy.service.login.LoginService;
+import roombuddy.roombuddy.utils.ErrorCheckUtil;
 
 import java.util.HashMap;
 import java.util.Map;

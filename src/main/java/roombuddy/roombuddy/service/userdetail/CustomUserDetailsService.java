@@ -1,4 +1,4 @@
-package roombudy.roombudy.service.userdetail;
+package roombuddy.roombuddy.service.userdetail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -6,10 +6,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.dao.mapper.MemberMapper;
-import roombudy.roombudy.domain.Member;
-import roombudy.roombudy.domain.userdetail.CustomUserDetails;
-import roombudy.roombudy.exception.ErrorMessage;
+import roombuddy.roombuddy.dao.mapper.MemberMapper;
+import roombuddy.roombuddy.domain.Member;
+import roombuddy.roombuddy.domain.userdetail.CustomUserDetails;
+import roombuddy.roombuddy.exception.ErrorMessage;
 
 /**
  * CustomUserDetails를 생성하는 서비스 -> Spring Security에 필요

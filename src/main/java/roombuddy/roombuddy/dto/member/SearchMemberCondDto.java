@@ -1,8 +1,8 @@
-package roombudy.roombudy.dto.member;
+package roombuddy.roombuddy.dto.member;
 
 import lombok.Getter;
 import lombok.Setter;
-import roombudy.roombudy.enums.MemberSortType;
+import roombuddy.roombuddy.enums.MemberSortType;
 
 /**
  * 회원 검색 조건 DTO

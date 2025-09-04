@@ -1,12 +1,12 @@
-package roombudy.roombudy.service.token;
+package roombuddy.roombuddy.service.token;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.config.jwt.TokenProvider;
-import roombudy.roombudy.exception.ErrorMessage;
-import roombudy.roombudy.exception.JwtCustomException;
+import roombuddy.roombuddy.config.jwt.TokenProvider;
+import roombuddy.roombuddy.exception.ErrorMessage;
+import roombuddy.roombuddy.exception.JwtCustomException;
 
 import java.util.concurrent.TimeUnit;
 

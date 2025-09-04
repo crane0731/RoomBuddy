@@ -1,7 +1,7 @@
-package roombudy.roombudy.dao.mapper;
+package roombuddy.roombuddy.dao.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import roombudy.roombudy.domain.Token;
+import roombuddy.roombuddy.domain.Token;
 
 import java.util.List;
 import java.util.Optional;

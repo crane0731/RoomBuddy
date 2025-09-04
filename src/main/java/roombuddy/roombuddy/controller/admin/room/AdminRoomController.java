@@ -1,15 +1,15 @@
-package roombudy.roombudy.controller.admin.room;
+package roombuddy.roombuddy.controller.admin.room;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.room.CreateRoomRequestDto;
-import roombudy.roombudy.dto.room.UpdateRoomRequestDto;
-import roombudy.roombudy.service.admin.room.AdminRoomService;
-import roombudy.roombudy.utils.ErrorCheckUtil;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.dto.room.CreateRoomRequestDto;
+import roombuddy.roombuddy.dto.room.UpdateRoomRequestDto;
+import roombuddy.roombuddy.service.admin.room.AdminRoomService;
+import roombuddy.roombuddy.utils.ErrorCheckUtil;
 
 import java.util.HashMap;
 import java.util.Map;

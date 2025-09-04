@@ -1,4 +1,4 @@
-package roombudy.roombudy.controller.member;
+package roombuddy.roombuddy.controller.member;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -6,12 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.member.UpdateMemberNameRequestDto;
-import roombudy.roombudy.dto.member.UpdateMemberPasswordRequestDto;
-import roombudy.roombudy.dto.member.UpdateMemberPhoneRequestDto;
-import roombudy.roombudy.service.member.MemberService;
-import roombudy.roombudy.utils.ErrorCheckUtil;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.dto.member.UpdateMemberNameRequestDto;
+import roombuddy.roombuddy.dto.member.UpdateMemberPasswordRequestDto;
+import roombuddy.roombuddy.dto.member.UpdateMemberPhoneRequestDto;
+import roombuddy.roombuddy.service.member.MemberService;
+import roombuddy.roombuddy.utils.ErrorCheckUtil;
 
 import java.util.HashMap;
 import java.util.Map;

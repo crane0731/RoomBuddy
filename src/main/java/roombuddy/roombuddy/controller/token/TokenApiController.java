@@ -1,4 +1,4 @@
-package roombudy.roombudy.controller.token;
+package roombuddy.roombuddy.controller.token;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.token.TokenResponseDto;
-import roombudy.roombudy.service.token.TokenService;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.dto.token.TokenResponseDto;
+import roombuddy.roombuddy.service.token.TokenService;
 
 /**
  * 토큰 컨트롤러

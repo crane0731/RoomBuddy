@@ -4,12 +4,14 @@ server:
 spring:
   application:
     name: roombuddy
+  profiles:
+    active: dev
 
   mail:
     host: smtp.gmail.com
     port: 587
-    username: dlwnsgkr8318@gmail.com
-    password: gzml aslc gurn fxpb
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -22,9 +24,9 @@ spring:
       port: 6379
 
   datasource:
-    url: jdbc:mysql://localhost:3306/roombudy_db
-    username: crane
-    password: 1234
+    url: jdbc:mysql://localhost:3306/roombuddy_db
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
 logging:
@@ -34,7 +36,7 @@ logging:
     org.springframework.security: DEBUG
 
 mybatis:
-  type-aliases-package: roombudy.roombudy.dao, roombudy.roombudy.dto , roombudy.roombudy.domain
+  type-aliases-package: roombuddy.roombuddy.dao, roombuddy.roombuddy.dto , roombuddy.roombuddy.domain
   configuration:
     map-underscore-to-camel-case: true
 
@@ -47,5 +49,5 @@ decorator:
 
 jwt:
   issuer: dlwnsgkr8318@skuniv.ac.kr
-  access-secret-key: asdasjvnoansckln12359449asddafkmsbxibuoiuoiuqwepppokkasf2asd
-  refresh-secret_key: asfacolkasndlknv3203klfamkld02asdkjfajkvnlancdkdklmasdklv
+  access-secret-key: ${JWT_ACCESS_KEY}
+  refresh-secret_key: ${JWT_REFRESH_KEY}

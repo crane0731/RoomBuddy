@@ -1,10 +1,10 @@
-package roombudy.roombudy.domain.userdetail;
+package roombuddy.roombuddy.domain.userdetail;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import roombudy.roombudy.domain.Member;
+import roombuddy.roombuddy.domain.Member;
 
 import java.util.Collection;
 import java.util.List;

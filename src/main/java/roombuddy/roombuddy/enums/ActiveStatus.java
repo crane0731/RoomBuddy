@@ -1,4 +1,4 @@
-package roombudy.roombudy.enums;
+package roombuddy.roombuddy.enums;
 
 /**
  * 활성화 상태

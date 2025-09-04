@@ -1,4 +1,4 @@
-package roombudy.roombudy.dto.room;
+package roombuddy.roombuddy.dto.room;
 
 import lombok.Getter;
 import lombok.Setter;

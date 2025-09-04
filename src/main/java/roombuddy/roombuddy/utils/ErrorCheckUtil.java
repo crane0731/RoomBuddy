@@ -1,4 +1,4 @@
-package roombudy.roombudy.utils;
+package roombuddy.roombuddy.utils;
 
 import org.springframework.validation.BindingResult;
 

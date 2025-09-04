@@ -1,4 +1,4 @@
-package roombudy.roombudy.enums;
+package roombuddy.roombuddy.enums;
 
 /**
  * 토큰타입을 구별하기 위한 ENUM

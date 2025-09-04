@@ -1,4 +1,4 @@
-package roombudy.roombudy.config.jwt;
+package roombuddy.roombuddy.config.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -9,8 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
-import roombudy.roombudy.exception.ErrorMessage;
-import roombudy.roombudy.service.token.TokenBlackListService;
+import roombuddy.roombuddy.exception.ErrorMessage;
+import roombuddy.roombuddy.service.token.TokenBlackListService;
 
 import java.io.IOException;
 

@@ -1,22 +1,21 @@
-package roombudy.roombudy.service.member;
+package roombuddy.roombuddy.service.member;
 
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.dao.mapper.MemberMapper;
-import roombudy.roombudy.domain.Member;
-import roombudy.roombudy.domain.userdetail.CustomUserDetails;
-import roombudy.roombudy.dto.api.PagedResponseDto;
-import roombudy.roombudy.dto.member.*;
-import roombudy.roombudy.exception.ErrorMessage;
-import roombudy.roombudy.exception.MemberCustomException;
-import roombudy.roombudy.service.token.RefreshTokenService;
-import roombudy.roombudy.service.token.TokenBlackListService;
+import roombuddy.roombuddy.dao.mapper.MemberMapper;
+import roombuddy.roombuddy.domain.Member;
+import roombuddy.roombuddy.domain.userdetail.CustomUserDetails;
+import roombuddy.roombuddy.dto.api.PagedResponseDto;
+import roombuddy.roombuddy.dto.member.*;
+import roombuddy.roombuddy.exception.ErrorMessage;
+import roombuddy.roombuddy.exception.MemberCustomException;
+import roombuddy.roombuddy.service.token.RefreshTokenService;
+import roombuddy.roombuddy.service.token.TokenBlackListService;
 
 import java.util.List;
 

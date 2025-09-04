@@ -1,4 +1,4 @@
-package roombudy.roombudy.dto.member;
+package roombuddy.roombuddy.dto.member;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

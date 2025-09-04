@@ -1,15 +1,14 @@
-package roombudy.roombudy.controller.admin.blackout;
+package roombuddy.roombuddy.controller.admin.blackout;
 
 import jakarta.validation.Valid;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.blackout.CreateBlackoutRequestDto;
-import roombudy.roombudy.service.blackout.BlackoutService;
-import roombudy.roombudy.utils.ErrorCheckUtil;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.dto.blackout.CreateBlackoutRequestDto;
+import roombuddy.roombuddy.service.blackout.BlackoutService;
+import roombuddy.roombuddy.utils.ErrorCheckUtil;
 
 import java.util.HashMap;
 import java.util.Map;

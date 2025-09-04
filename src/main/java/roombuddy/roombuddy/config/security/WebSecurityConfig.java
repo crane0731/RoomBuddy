@@ -1,4 +1,4 @@
-package roombudy.roombudy.config.security;
+package roombuddy.roombuddy.config.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -15,10 +15,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import roombudy.roombudy.config.jwt.TokenAuthenticationFilter;
-import roombudy.roombudy.config.jwt.TokenProvider;
-import roombudy.roombudy.service.token.TokenBlackListService;
-import roombudy.roombudy.service.userdetail.CustomUserDetailsService;
+import roombuddy.roombuddy.config.jwt.TokenAuthenticationFilter;
+import roombuddy.roombuddy.config.jwt.TokenProvider;
+import roombuddy.roombuddy.service.token.TokenBlackListService;
+import roombuddy.roombuddy.service.userdetail.CustomUserDetailsService;
 
 /**
  * 스프링 시큐리티 설정 클래스

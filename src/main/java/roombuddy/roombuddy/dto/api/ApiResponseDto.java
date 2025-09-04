@@ -1,4 +1,4 @@
-package roombudy.roombudy.dto.api;
+package roombuddy.roombuddy.dto.api;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

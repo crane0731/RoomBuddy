@@ -1,4 +1,4 @@
-package roombudy.roombudy.exception;
+package roombuddy.roombuddy.exception;
 
 public class JwtCustomException extends RuntimeException {
     public JwtCustomException(String message) {

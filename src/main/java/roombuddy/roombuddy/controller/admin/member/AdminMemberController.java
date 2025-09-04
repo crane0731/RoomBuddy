@@ -1,12 +1,12 @@
-package roombudy.roombudy.controller.admin.member;
+package roombuddy.roombuddy.controller.admin.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import roombudy.roombudy.dto.api.ApiResponseDto;
-import roombudy.roombudy.dto.member.SearchMemberCondDto;
-import roombudy.roombudy.enums.MemberSortType;
-import roombudy.roombudy.service.admin.member.AdminMemberService;
+import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.dto.member.SearchMemberCondDto;
+import roombuddy.roombuddy.enums.MemberSortType;
+import roombuddy.roombuddy.service.admin.member.AdminMemberService;
 
 import java.util.Map;
 

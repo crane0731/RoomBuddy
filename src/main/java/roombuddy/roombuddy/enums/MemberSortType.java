@@ -1,4 +1,4 @@
-package roombudy.roombudy.enums;
+package roombuddy.roombuddy.enums;
 
 /**
  * 회원 정렬 기준

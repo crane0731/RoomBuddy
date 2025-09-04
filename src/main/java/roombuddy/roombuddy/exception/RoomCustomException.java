@@ -1,4 +1,4 @@
-package roombudy.roombudy.exception;
+package roombuddy.roombuddy.exception;
 
 public class RoomCustomException extends RuntimeException {
     public RoomCustomException(String message) {

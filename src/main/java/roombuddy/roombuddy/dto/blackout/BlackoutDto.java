@@ -1,4 +1,4 @@
-package roombudy.roombudy.dto.blackout;
+package roombuddy.roombuddy.dto.blackout;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -1,4 +1,4 @@
-package roombudy.roombudy.dto.login;
+package roombuddy.roombuddy.dto.login;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;

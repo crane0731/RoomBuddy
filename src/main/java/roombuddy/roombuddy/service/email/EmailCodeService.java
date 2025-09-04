@@ -1,4 +1,4 @@
-package roombudy.roombudy.service.email;
+package roombuddy.roombuddy.service.email;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,11 +7,11 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.dto.login.SendEmailRequestDto;
-import roombudy.roombudy.dto.login.ValidateEmailCodeRequestDto;
-import roombudy.roombudy.exception.ErrorMessage;
-import roombudy.roombudy.exception.MemberCustomException;
-import roombudy.roombudy.utils.CodeUtil;
+import roombuddy.roombuddy.dto.login.SendEmailRequestDto;
+import roombuddy.roombuddy.dto.login.ValidateEmailCodeRequestDto;
+import roombuddy.roombuddy.exception.ErrorMessage;
+import roombuddy.roombuddy.exception.MemberCustomException;
+import roombuddy.roombuddy.utils.CodeUtil;
 
 /**
  * 이메일 인증 코드 서비스

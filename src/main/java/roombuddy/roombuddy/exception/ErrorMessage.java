@@ -1,4 +1,4 @@
-package roombudy.roombudy.exception;
+package roombuddy.roombuddy.exception;
 
 /**
  * 커스텀 에러 메시지

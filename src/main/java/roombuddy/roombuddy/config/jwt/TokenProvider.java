@@ -1,4 +1,4 @@
-package roombudy.roombudy.config.jwt;
+package roombuddy.roombuddy.config.jwt;
 
 import io.jsonwebtoken.*;
 import lombok.RequiredArgsConstructor;
@@ -6,12 +6,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
-import roombudy.roombudy.domain.Member;
-import roombudy.roombudy.domain.userdetail.CustomUserDetails;
-import roombudy.roombudy.enums.TokenType;
-import roombudy.roombudy.exception.ErrorMessage;
-import roombudy.roombudy.exception.JwtCustomException;
-import roombudy.roombudy.service.userdetail.CustomUserDetailsService;
+import roombuddy.roombuddy.domain.Member;
+import roombuddy.roombuddy.domain.userdetail.CustomUserDetails;
+import roombuddy.roombuddy.enums.TokenType;
+import roombuddy.roombuddy.exception.ErrorMessage;
+import roombuddy.roombuddy.exception.JwtCustomException;
+import roombuddy.roombuddy.service.userdetail.CustomUserDetailsService;
 
 import java.time.Duration;
 import java.util.Collections;

@@ -1,13 +1,12 @@
-package roombudy.roombudy.dao.mapper;
+package roombuddy.roombuddy.dao.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import roombudy.roombudy.domain.Reservation;
-import roombudy.roombudy.dto.member.SearchMemberCondDto;
-import roombudy.roombudy.dto.reservation.MyReservationListResponseDto;
-import roombudy.roombudy.dto.reservation.ReservationListResponseDto;
-import roombudy.roombudy.dto.reservation.ReservationSlotDto;
-import roombudy.roombudy.dto.reservation.SearchReservationCondDto;
+import roombuddy.roombuddy.domain.Reservation;
+import roombuddy.roombuddy.dto.reservation.MyReservationListResponseDto;
+import roombuddy.roombuddy.dto.reservation.ReservationListResponseDto;
+import roombuddy.roombuddy.dto.reservation.ReservationSlotDto;
+import roombuddy.roombuddy.dto.reservation.SearchReservationCondDto;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

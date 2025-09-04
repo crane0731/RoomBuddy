@@ -1,10 +1,10 @@
-package roombudy.roombudy.dto.blackout;
+package roombuddy.roombuddy.dto.blackout;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
-import roombudy.roombudy.enums.Scope;
+import roombuddy.roombuddy.enums.Scope;
 
 import java.time.LocalDateTime;
 

@@ -1,14 +1,14 @@
-package roombudy.roombudy.service.admin.member;
+package roombuddy.roombuddy.service.admin.member;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombudy.roombudy.dto.api.PagedResponseDto;
-import roombudy.roombudy.dto.member.MemberInfoResponseDto;
-import roombudy.roombudy.dto.member.MemberListResponseDto;
-import roombudy.roombudy.dto.member.SearchMemberCondDto;
-import roombudy.roombudy.service.member.MemberService;
-import roombudy.roombudy.service.token.RefreshTokenService;
+import roombuddy.roombuddy.dto.api.PagedResponseDto;
+import roombuddy.roombuddy.dto.member.MemberInfoResponseDto;
+import roombuddy.roombuddy.dto.member.MemberListResponseDto;
+import roombuddy.roombuddy.dto.member.SearchMemberCondDto;
+import roombuddy.roombuddy.service.member.MemberService;
+import roombuddy.roombuddy.service.token.RefreshTokenService;
 
 /**
  * 관리자 회원 서비스
