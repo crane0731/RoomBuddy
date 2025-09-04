@@ -29,6 +29,7 @@ jobs:
           key: ${{ secrets.EC2_KEY }}
           source: "build/libs/*.jar"
           target: "/home/ubuntu/app"
+          strip_components: 2   # build/libs/ 잘라내고 JAR만 복사
 
       - name: Run deploy script on EC2
         uses: appleboy/ssh-action@v0.1.7
