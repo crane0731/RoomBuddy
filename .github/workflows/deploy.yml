@@ -37,5 +37,6 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_KEY }}
           script: |
+            echo ">>> Running deploy script on EC2"
             chmod +x /home/ubuntu/app/deploy.sh
             /home/ubuntu/app/deploy.sh
