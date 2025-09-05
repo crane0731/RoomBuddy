@@ -66,14 +66,13 @@ public class EmailCodeService {
             message.setTo(recipient); //수신자 이메일
             message.setSubject("룸버디 인증 코드"); //이메일 제목
             message.setText("인증 코드 : " +code); // 이메일 내용
-            message.setFrom("룸버디 <dlwnsgkr8318@gmail.com>");
+            message.setFrom("dlwnsgkr8318@gmail.com");
 
             //이메일 전송
             mailSender.send(message);
             log.info("이메일 전송 성공!");
 
         }catch (Exception e){
-            log.info("하이");
             log.error("이메일 전송 실패: {}", e.getMessage());
         }
     }
