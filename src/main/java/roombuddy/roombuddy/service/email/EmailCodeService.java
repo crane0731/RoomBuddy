@@ -73,7 +73,9 @@ public class EmailCodeService {
             log.info("이메일 전송 성공!");
 
         }catch (Exception e){
-            log.error("이메일 전송 실패: {}", e.getMessage());
+//            log.error("이메일 전송 실패: {}", e.getMessage());
+            log.error("이메일 전송 실패", e);  // 전체 스택트레이스 출력
+            throw new RuntimeException(e);   // 일단 예외도 다시 던져서 API 응답에서 확인 가능하게
         }
     }
 
