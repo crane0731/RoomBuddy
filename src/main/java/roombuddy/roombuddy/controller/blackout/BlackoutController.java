@@ -18,7 +18,7 @@ public class BlackoutController {
 
     /**
      * [컨트롤러]
-     * 관리자 - 특정 스터디룸에 대한 오늘의 블랙 아웃 목록 조회
+     * 특정 스터디룸에 대한 오늘의 블랙 아웃 목록 조회
      * @param id 스터디룸 아이디
      * @return PagedResponseDto<BlackoutListResponseDto>
      */

@@ -73,7 +73,7 @@ public class EmailCodeService {
             log.info("이메일 전송 성공!");
 
         }catch (Exception e){
-            log.warn("이메일 전송 실패: {}", e.getMessage());
+            log.error("이메일 전송 실패: {}", e.getMessage());
         }
     }
 

@@ -72,7 +72,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/roombuddy/auth/signup/**","/api/roombuddy/auth/login",
                                 "/static/***","/profile-images/**","/test.html","/api/auth/**",
-                                "/api/roombuddy/rooms","http://localhost:8081/"
+                                "/api/roombuddy/rooms"
                         )
                         .permitAll()
 
