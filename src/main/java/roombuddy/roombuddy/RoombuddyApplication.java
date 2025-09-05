@@ -6,10 +6,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-public class RoombudyApplication {
+public class RoombuddyApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(RoombudyApplication.class, args);
+		SpringApplication.run(RoombuddyApplication.class, args);
 	}
 
 }
