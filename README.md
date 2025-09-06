@@ -123,8 +123,6 @@ https://www.erdcloud.com/d/QbHWvYEn6iuajcPpj
 
 ## 🛠️기술 스택
 
-### 🛠️ 기술 스택
-
 **FRONTEND**
 
 - Vue 3 (Composition API)
@@ -149,6 +147,91 @@ https://www.erdcloud.com/d/QbHWvYEn6iuajcPpj
 - AWS EC2 (Ubuntu, Nginx, Free Tier)
 - GitHub & GitHub Actions
 - DuckDNS (도메인)
+
+---
+
+## 📚기능 명세서
+
+<aside>
+
+BASE URL :  /api/roombuddy
+
+</aside>
+
+## 로그인
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 회원 가입 | `/auth/signup` | POST | 회원 가입을 진행한다. |
+| 로그인 | `/auth/login` | POST | 로그인을 진행한다. |
+| 로그아웃 | `/auth/logout` | POST | 로그아웃을 진행한다. |
+| 인증 메일 보내기 | `/auth/signup/email` | POST | 이메일 인증 메일을 보낸다. |
+| 인증 코드 확인  | `/auth/signup/email/validate` | POST | 이메일 인증 코드를 확인한다. |
+
+## 토큰
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 새로운 엑세스 토큰 발급 | `/auth/token` | POST | 리프레쉬 토큰을 통해서 새로운 엑세스 토큰을 발급 한다. |
+
+## 회원
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 자신의 정보 조회 | `/members/me` | GET | 자신의 정보를 상세 조회한다. |
+| 회원 이름 수정 | `/members/me/name` | PUT | 회원의 이름을 수정한다. |
+| 회원 전화번호 수정 | `/members/me/phone` | PUT | 회원의 전화번호를 수정한다. |
+| 회원 비밀번호 수정 | `/members/me/password` | PUT | 회원의 비밀번호를 수정한다. |
+| 회원 탈퇴 | `/members/me/withdraw` | DELETE | 회원 탈퇴를 진행한다. |
+
+## 예약
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 예약 | `/reservation/rooms/{id}` | POST | 예약을 진행한다. |
+| 예약 취소 | `/reservation/{id}` | POST | 예약을 취소한다. |
+| 특정 스터디룸의 당일 예약 목록 조회 | `/reservation/rooms/{id}` | GET | 특정 스터디룸의 당일 예약 목록을 조회한다. |
+| 자신의 예약 목록 확인 | `/reservation/me` | GET | 자신의 예약 목록을 확인한다. |
+
+## 스터디룸
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 스터디룸 목록 조회 | `/api/roombuddy/rooms` | GET | 스터디룸 목록을 조회한다. |
+| 스터디룸 상세 정보 조회 | `/api/roombuddy/rooms/{id}` | GET | 스터디룸의 상세 정보를 조회한다. |
+
+## 블랙 아웃
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 특정 스터디룸에 대한 오늘의 블랙 아웃 목록 조회 | `/api/roombuddy/blackout/rooms/{id}/today` | GET | 특정 스터디룸에 대한 오늘의 블랙 아웃 목록을 조회한다. |
+
+## 관리자
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 회원 목록 조회 | `/admin/members` | GET | 회원 목록을 조회한다. |
+| 회원 상세 정보 조회 | `/admin/members/{id}` | GET | 회원 정보를 상세 조회한다. |
+| 회원 삭제 | `/admin/members/{id}` | DELETE | 회원을 삭제 한다. |
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 스터디룸 생성 | `/admin/rooms` | POST | 스터디룸을 생성한다. |
+| 스터디룸 삭제 | `/admin/rooms/{id}` | DELETE | 스터디룸을 삭제한다. |
+| 스터디룸 수정 | `/admin/rooms/{id}` | PUT | 스터디룸을 수정한다. |
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 예약 취소 | `/admin/reservation/{id}` | DELETE | 예약을 취소한다. |
+| 특정 스터디룸의 예약 목록 조회 | `/admin/reservation/rooms/{id}` | GET | 특정 스터디룸의 예약 목록을 확인한다. |
+| 현재 진행중인 예약 목록 조회 | `/admin/reservation` | GET | 현재 진행중인 예약 목록을 확인한다. |
+
+| 기능 | URL | 방식 | 설명 |
+| --- | --- | --- | --- |
+| 블랙아웃 등록 | `/admin/blackout` | POST | 블랙아웃을 등록한다. |
+| 블랙아웃 삭제 | `/admin/blackout/{id}` | DELETE | 블랙아웃을 삭제한다. |
+| 특정 스터디룸에 대한 블랙 아웃 목록 조회 | `/admin/blackout/rooms/{id}` | GET | 특정 스터디룸에 대한 블랙 아웃 목록을 조회한다. |
+| 현재 진행중인 혹은 예정인 블랙 아웃 목록 조회 | `/admin/blackout` | GET | 현재 진행중이거나 예정인 블랙 아웃 목록을 조회한다. |
 
 ---
 
