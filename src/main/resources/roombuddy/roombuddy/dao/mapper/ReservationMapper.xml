@@ -159,7 +159,7 @@
 
         ORDER BY rv.created_at
         <choose>
-            <when test="cond.created == 'ASC'">ASC</when>
+            <when test="cond.created.name() == 'ASC'">ASC</when>
             <otherwise>DESC</otherwise>
         </choose>
 
