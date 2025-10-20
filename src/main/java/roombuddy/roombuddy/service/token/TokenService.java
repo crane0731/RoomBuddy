@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import roombuddy.roombuddy.config.jwt.TokenProvider;
 import roombuddy.roombuddy.dao.mapper.MemberMapper;
-import roombuddy.roombuddy.domain.Member;
+import roombuddy.roombuddy.mybatisdomain.Member;
 import roombuddy.roombuddy.enums.TokenType;
 import roombuddy.roombuddy.exception.ErrorMessage;
 import roombuddy.roombuddy.exception.JwtCustomException;

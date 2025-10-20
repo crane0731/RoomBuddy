@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import roombuddy.roombuddy.dao.mapper.BlackoutMapper;
 import roombuddy.roombuddy.dao.mapper.ReservationMapper;
 import roombuddy.roombuddy.dao.mapper.RoomMapper;
-import roombuddy.roombuddy.domain.Room;
+import roombuddy.roombuddy.mybatisdomain.Room;
 import roombuddy.roombuddy.dto.blackout.BlackoutDto;
 import roombuddy.roombuddy.dto.reservation.ReservationSlotDto;
 import roombuddy.roombuddy.dto.room.RoomInfoResponseDto;

@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import roombuddy.roombuddy.dao.mapper.MemberMapper;
-import roombuddy.roombuddy.domain.Member;
-import roombuddy.roombuddy.domain.userdetail.CustomUserDetails;
+import roombuddy.roombuddy.mybatisdomain.Member;
+import roombuddy.roombuddy.mybatisdomain.userdetail.CustomUserDetails;
 import roombuddy.roombuddy.exception.ErrorMessage;
 
 /**

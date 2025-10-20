@@ -2,7 +2,7 @@ package roombuddy.roombuddy.dao.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import roombuddy.roombuddy.domain.Blackout;
+import roombuddy.roombuddy.mybatisdomain.Blackout;
 import roombuddy.roombuddy.dto.blackout.BlackoutDto;
 import roombuddy.roombuddy.dto.blackout.BlackoutListResponseDto;
 

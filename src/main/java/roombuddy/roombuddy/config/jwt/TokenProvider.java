@@ -6,8 +6,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
-import roombuddy.roombuddy.domain.Member;
-import roombuddy.roombuddy.domain.userdetail.CustomUserDetails;
+import roombuddy.roombuddy.mybatisdomain.Member;
+import roombuddy.roombuddy.mybatisdomain.userdetail.CustomUserDetails;
 import roombuddy.roombuddy.enums.TokenType;
 import roombuddy.roombuddy.exception.ErrorMessage;
 import roombuddy.roombuddy.exception.JwtCustomException;

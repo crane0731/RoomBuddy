@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import roombuddy.roombuddy.dao.mapper.ReservationMapper;
-import roombuddy.roombuddy.domain.Blackout;
-import roombuddy.roombuddy.domain.Reservation;
-import roombuddy.roombuddy.domain.Room;
+import roombuddy.roombuddy.mybatisdomain.Blackout;
+import roombuddy.roombuddy.mybatisdomain.Reservation;
+import roombuddy.roombuddy.mybatisdomain.Room;
 import roombuddy.roombuddy.dto.api.PagedResponseDto;
 import roombuddy.roombuddy.dto.reservation.CreateReservationRequestDto;
 import roombuddy.roombuddy.dto.reservation.MyReservationListResponseDto;
@@ -132,21 +132,26 @@ public class ReservationService {
      * @return PagedResponseDto<ReservationListResponseDto>
      */
     public PagedResponseDto<ReservationListResponseDto> getReservationsByRoomAndCond(SearchReservationCondDto cond, Long roomId, int page){
-        List<ReservationListResponseDto> content = reservationMapper.findAllReservationsByRoomAndCond(roomId, cond, page, 10);
+
+        int offset = page * 10;
+
+        List<ReservationListResponseDto> content = reservationMapper.findAllReservationsByRoomAndCond(roomId, cond, offset, 10);
         Long total = reservationMapper.countByRoomAndCond(roomId, cond);
         return createPagedResponseDto(content,total,page,10);
-
     }
 
     /**
      * [서비스 로직]
-     * 스터디룸과 검색 조건을 이용하여 예약 목록 조회
+     * 특정스터디룸의 예약완료된 예약 로그 목록 조회
      * @param roomId 스터디룸 아이디
      * @param page 페이지 번호
      * @return PagedResponseDto<ReservationListResponseDto>
      */
     public PagedResponseDto<ReservationListResponseDto> getConfirmedReservations(Long roomId,int page){
-        List<ReservationListResponseDto> content = reservationMapper.findConfirmedReservationByRoom(roomId,page,10);
+
+        int offset = page * 10;
+
+        List<ReservationListResponseDto> content = reservationMapper.findConfirmedReservationByRoom(roomId,offset,10);
         Long total = reservationMapper.countByRoom(roomId);
         return createPagedResponseDto(content,total,page,10);
     }

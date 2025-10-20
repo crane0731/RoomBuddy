@@ -3,7 +3,7 @@ package roombuddy.roombuddy.service.admin.room;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombuddy.roombuddy.domain.Room;
+import roombuddy.roombuddy.mybatisdomain.Room;
 import roombuddy.roombuddy.dto.room.CreateRoomRequestDto;
 import roombuddy.roombuddy.dto.room.UpdateRoomRequestDto;
 import roombuddy.roombuddy.service.room.RoomService;

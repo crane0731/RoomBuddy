@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import roombuddy.roombuddy.dao.mapper.ReservationMapper;
-import roombuddy.roombuddy.domain.Reservation;
+import roombuddy.roombuddy.mybatisdomain.Reservation;
 import roombuddy.roombuddy.enums.ReservationStatus;
 
 import java.util.List;

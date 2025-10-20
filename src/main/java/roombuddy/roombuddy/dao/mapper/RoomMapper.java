@@ -2,7 +2,7 @@ package roombuddy.roombuddy.dao.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import roombuddy.roombuddy.domain.Room;
+import roombuddy.roombuddy.mybatisdomain.Room;
 import roombuddy.roombuddy.dto.room.RoomInfoResponseDto;
 import roombuddy.roombuddy.dto.room.RoomListResponseDto;
 import roombuddy.roombuddy.dto.room.UpdateRoomRequestDto;

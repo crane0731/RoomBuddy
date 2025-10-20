@@ -155,11 +155,12 @@
             <if test="cond.date != null">
                 AND DATE(rv.start_at) = #{cond.date}
             </if>
+
         </where>
 
         ORDER BY rv.created_at
         <choose>
-            <when test="cond.created.name() == 'ASC'">ASC</when>
+            <when test="cond.created != null and cond.created.name() == 'ASC'">ASC</when>
             <otherwise>DESC</otherwise>
         </choose>
 

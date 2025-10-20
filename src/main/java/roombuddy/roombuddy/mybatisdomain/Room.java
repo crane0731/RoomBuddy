@@ -1,4 +1,4 @@
-package roombuddy.roombuddy.domain;
+package roombuddy.roombuddy.mybatisdomain;
 
 import lombok.AccessLevel;
 import lombok.Getter;
