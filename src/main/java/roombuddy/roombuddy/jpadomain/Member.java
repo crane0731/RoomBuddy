@@ -23,7 +23,7 @@ public class Member extends BaseTimeEntity {
     @Column(name = "member_id")
     private Long id;//PK
 
-    @Column(name = "email",unique = true)
+    @Column(name = "email")
     private String email;//이메일
 
     @Column(name = "password")
@@ -32,7 +32,7 @@ public class Member extends BaseTimeEntity {
     @Column(name = "name")
     private String name;//이름
 
-    @Column(name = "phone",unique = true)
+    @Column(name = "phone")
     private String phone;//전화번호
 
     @Enumerated(EnumType.STRING)
