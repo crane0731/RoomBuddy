@@ -43,4 +43,45 @@ public class Member extends BaseTimeEntity {
     @Column(name = "active_status",nullable = false)
     private ActiveStatus activeStatus; //활성화 상태
 
+
+    /**
+     * [비즈니스 로직]
+     * SOFT DELETE
+     */
+    public void softDelete(){
+        this.name="삭제된 회원 이름";
+        this.email=null;
+        this.password=null;
+        this.phone=null;
+        this.activeStatus=ActiveStatus.INACTIVE;
+
+    }
+
+    /**
+     * [비즈니스 로직]
+     * 이름 업데이트
+     * @param newName 새로운 이름
+     */
+    public void updateName(String newName){
+        this.name=newName;
+    }
+
+    /**
+     * [비즈니스 로직]
+     * 전화번호 업데이트
+     * @param newPhone 새로운 전화 번호
+     */
+    public void updatePhone(String newPhone){
+        this.phone=newPhone;
+    }
+
+    /**
+     * [비즈니스 로직]
+     * 패스워드 업데이트
+     * @param newPassword 새로운 패스워드(인코딩 된)
+     */
+    public void updatePassword(String newPassword){
+        this.password=newPassword;
+    }
+
 }

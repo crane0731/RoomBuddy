@@ -14,6 +14,7 @@ import roombuddy.roombuddy.dto.api.PagedResponseDto;
 import roombuddy.roombuddy.dto.member.*;
 import roombuddy.roombuddy.exception.ErrorMessage;
 import roombuddy.roombuddy.exception.MemberCustomException;
+import roombuddy.roombuddy.repository.MemberRepository;
 import roombuddy.roombuddy.service.token.RefreshTokenService;
 import roombuddy.roombuddy.service.token.TokenBlackListService;
 
