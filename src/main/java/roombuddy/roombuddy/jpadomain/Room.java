@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import roombuddy.roombuddy.enums.ActiveStatus;
+import roombuddy.roombuddy.jpadomain.baseentity.BaseTimeEntity;
+
 import java.time.LocalTime;
 
 /**
@@ -14,7 +16,7 @@ import java.time.LocalTime;
 @Table(name="room")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Room {
+public class Room extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +38,21 @@ public class Room {
 
     @Column(name = "close_time",nullable = false)
     private LocalTime closeTime; // 예약 가능 종료시간
+
+    /**
+     * [비즈니스 로직]
+     * 업데이트
+     * @param name 이름
+     * @param capacity 수용 인원
+     * @param openTime 오픈 시간
+     * @param closeTime 종료 시간
+     */
+    public void update(String name, Long capacity, LocalTime openTime, LocalTime closeTime) {
+        this.name = name;
+        this.capacity = capacity;
+        this.openTime = openTime;
+        this.closeTime = closeTime;
+    }
 
 
 }

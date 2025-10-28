@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.jpaservice.room.JpaRoomService;
 import roombuddy.roombuddy.service.room.RoomService;
 
 /**
@@ -19,6 +20,8 @@ public class RoomController {
 
     private final RoomService roomService;//스터디룸 서비스
 
+    private final JpaRoomService jpaRoomService;//Jpa 룸 서비스
+
     /**
      * [컨트롤러]
      * 스터디룸 목록 조회
@@ -26,7 +29,7 @@ public class RoomController {
      */
     @GetMapping("")
     public ResponseEntity<ApiResponseDto<?>> getAllRooms() {
-        return ResponseEntity.ok(ApiResponseDto.success(roomService.getRoomListForToday()));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaRoomService.getRoomListForToday()));
     }
 
     /**
@@ -37,7 +40,7 @@ public class RoomController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponseDto<?>> getRoomInfo(@PathVariable("id") Long id) {
-        return ResponseEntity.ok(ApiResponseDto.success(roomService.findRoomInfo(id)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaRoomService.findRoomInfo(id)));
 
     }
 

@@ -1,5 +1,6 @@
 package roombuddy.roombuddy.dto.blackout;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,6 +11,7 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
+@AllArgsConstructor
 public class BlackoutDto {
 
     private LocalDateTime startAt; //블랙 아웃 시작 시간

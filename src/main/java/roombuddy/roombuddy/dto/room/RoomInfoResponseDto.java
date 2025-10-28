@@ -2,6 +2,8 @@ package roombuddy.roombuddy.dto.room;
 
 import lombok.Getter;
 import lombok.Setter;
+import roombuddy.roombuddy.jpadomain.Room;
+import roombuddy.roombuddy.utils.DateFormatUtil;
 
 import java.time.LocalTime;
 
@@ -21,5 +23,24 @@ public class RoomInfoResponseDto {
 
     private String createdAt; //생성일
     private String updatedAt; //수정일
+
+    /**
+     * [생성 메서드]
+     * @param room 스터디룸
+     * @return RoomInfoResponseDto
+     */
+    public static RoomInfoResponseDto create(Room room) {
+        RoomInfoResponseDto dto = new RoomInfoResponseDto();
+        dto.setRoomId(room.getId());
+        dto.setName(room.getName());
+        dto.setCapacity(room.getCapacity());
+
+        dto.setOpenTime(room.getOpenTime());
+        dto.setCloseTime(room.getCloseTime());
+
+        dto.setCreatedAt(DateFormatUtil.DateFormat(room.getCreatedAt()));
+        dto.setUpdatedAt(DateFormatUtil.DateFormat(room.getUpdatedAt()));
+        return dto;
+    }
 
 }
