@@ -15,8 +15,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import roombuddy.roombuddy.config.jwt.JpaTokenAuthenticationFilter;
+import roombuddy.roombuddy.config.jwt.JpaTokenProvider;
 import roombuddy.roombuddy.config.jwt.TokenAuthenticationFilter;
 import roombuddy.roombuddy.config.jwt.TokenProvider;
+import roombuddy.roombuddy.jpaservice.token.JpaTokenBlackListService;
+import roombuddy.roombuddy.jpaservice.userdetail.JpaCustomUserDetailsService;
 import roombuddy.roombuddy.service.token.TokenBlackListService;
 import roombuddy.roombuddy.service.userdetail.CustomUserDetailsService;
 
@@ -28,9 +32,13 @@ import roombuddy.roombuddy.service.userdetail.CustomUserDetailsService;
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-    private final TokenBlackListService tokenBlackListService;
-    private final CustomUserDetailsService customUserDetailsService;
-    private final TokenProvider tokenProvider;
+//    private final TokenBlackListService tokenBlackListService;
+//    private final CustomUserDetailsService customUserDetailsService;
+//    private final TokenProvider tokenProvider;
+
+    private final JpaTokenBlackListService tokenBlackListService;
+    private final JpaCustomUserDetailsService customUserDetailsService;
+    private final JpaTokenProvider tokenProvider;
 
 
     /**
@@ -62,7 +70,8 @@ public class WebSecurityConfig {
         // TokenAuthenticationFilter 생성 및 Security 필터 체인에 추가
 
         //토큰 인증 필터
-        TokenAuthenticationFilter tokenAuthenticationFilter = new TokenAuthenticationFilter(tokenBlackListService,tokenProvider);
+//        TokenAuthenticationFilter tokenAuthenticationFilter = new TokenAuthenticationFilter(tokenBlackListService,tokenProvider);
+        JpaTokenAuthenticationFilter tokenAuthenticationFilter = new JpaTokenAuthenticationFilter(tokenBlackListService,tokenProvider);
 
 
         http
