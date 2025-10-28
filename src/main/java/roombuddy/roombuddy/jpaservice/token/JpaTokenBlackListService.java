@@ -1,10 +1,10 @@
-package roombuddy.roombuddy.service.token;
+package roombuddy.roombuddy.jpaservice.token;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombuddy.roombuddy.config.jwt.TokenProvider;
+import roombuddy.roombuddy.config.jwt.JpaTokenProvider;
 import roombuddy.roombuddy.exception.ErrorMessage;
 import roombuddy.roombuddy.exception.JwtCustomException;
 
@@ -16,10 +16,10 @@ import java.util.concurrent.TimeUnit;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class TokenBlackListService {
+public class JpaTokenBlackListService {
 
     private final RedisTemplate<String, String> redisTemplate;
-    private final TokenProvider tokenProvider;
+    private final JpaTokenProvider tokenProvider;
 
     /**
      * 블랙리스트에 토큰을 저장

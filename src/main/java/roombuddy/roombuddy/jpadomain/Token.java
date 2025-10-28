@@ -23,4 +23,18 @@ public class Token extends BaseTimeEntity {
 
     @Column(name = "refresh_token")
     private String refreshToken;//리프레쉬 토큰
+
+
+    /**
+     * [생성 메서드]
+     * @param member 회원
+     * @param refreshToken 리프레쉬 토큰
+     * @return Token
+     */
+    public static Token create(Member member, String refreshToken) {
+        Token token = new Token();
+        token.member = member;
+        token.refreshToken = refreshToken;
+        return token;
+    }
 }
