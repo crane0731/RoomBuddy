@@ -43,6 +43,25 @@ public class Member extends BaseTimeEntity {
     @Column(name = "active_status",nullable = false)
     private ActiveStatus activeStatus; //활성화 상태
 
+    /**
+     * [생성 메서드]
+     * @param email 이메일
+     * @param password 패스워드
+     * @param name 이름
+     * @param phone 전화 번호
+     * @return Member
+     */
+    public static Member create(String email, String password, String name, String phone) {
+        Member member = new Member();
+        member.email=email;
+        member.password=password;
+        member.name=name;
+        member.phone=phone;
+        member.role=MemberRole.MEMBER;
+        member.activeStatus=ActiveStatus.ACTIVE;
+        return member;
+    }
+
 
     /**
      * [비즈니스 로직]

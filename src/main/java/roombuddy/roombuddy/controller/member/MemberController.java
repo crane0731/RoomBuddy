@@ -10,6 +10,7 @@ import roombuddy.roombuddy.dto.api.ApiResponseDto;
 import roombuddy.roombuddy.dto.member.UpdateMemberNameRequestDto;
 import roombuddy.roombuddy.dto.member.UpdateMemberPasswordRequestDto;
 import roombuddy.roombuddy.dto.member.UpdateMemberPhoneRequestDto;
+import roombuddy.roombuddy.jpaservice.member.JpaMemberService;
 import roombuddy.roombuddy.service.member.MemberService;
 import roombuddy.roombuddy.utils.ErrorCheckUtil;
 
@@ -22,6 +23,7 @@ import java.util.Map;
 public class MemberController {
 
     private final MemberService memberService;//회원 서비스
+    private final JpaMemberService jpaMemberService;//Jpa 회원 서비스
 
     /**
      * [컨트롤러]
@@ -30,7 +32,7 @@ public class MemberController {
      */
     @GetMapping("/me")
     public ResponseEntity<ApiResponseDto<?>> getMyMemberInfo(){
-        return ResponseEntity.ok(ApiResponseDto.success(memberService.getMyMemberInfo()));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaMemberService.getMyMemberInfo()));
     }
 
 
@@ -51,7 +53,7 @@ public class MemberController {
             return ResponseEntity.badRequest().body(ApiResponseDto.error("입력값이 올바르지 않습니다.", errorMessages));
         }
 
-        memberService.updateName(requestDto);
+        jpaMemberService.updateName(requestDto);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "이름 수정 성공")));
 
     }
@@ -73,7 +75,7 @@ public class MemberController {
             return ResponseEntity.badRequest().body(ApiResponseDto.error("입력값이 올바르지 않습니다.", errorMessages));
         }
 
-        memberService.updatePhone(requestDto);
+        jpaMemberService.updatePhone(requestDto);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "전화번호 수정 성공")));
 
     }
@@ -95,7 +97,7 @@ public class MemberController {
             return ResponseEntity.badRequest().body(ApiResponseDto.error("입력값이 올바르지 않습니다.", errorMessages));
         }
 
-        memberService.updatePassword(requestDto);
+        jpaMemberService.updatePassword(requestDto);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "비밀번호 수정 성공")));
 
     }
@@ -108,7 +110,7 @@ public class MemberController {
     @DeleteMapping("/me/withdraw")
     public ResponseEntity<ApiResponseDto<?>> withdrawMember(HttpServletRequest request){
 
-        memberService.withdraw(request);
+        jpaMemberService.withdraw(request);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "회원 탈퇴 성공")));
 
     }

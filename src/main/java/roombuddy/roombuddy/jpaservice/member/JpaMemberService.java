@@ -28,7 +28,7 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class JPaMemberService {
+public class JpaMemberService {
 
     private final JpaTokenBlackListService tokenBlackListService; //토큰 블랙리스트 서비스
     private final JpaRefreshTokenService refreshTokenService; //리프레쉬 토큰 서비스

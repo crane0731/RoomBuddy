@@ -15,6 +15,7 @@ import roombuddy.roombuddy.dto.login.SendEmailRequestDto;
 import roombuddy.roombuddy.dto.login.SignUpRequestDto;
 import roombuddy.roombuddy.dto.login.ValidateEmailCodeRequestDto;
 import roombuddy.roombuddy.dto.token.TokenResponseDto;
+import roombuddy.roombuddy.jpaservice.login.JpaLoginService;
 import roombuddy.roombuddy.service.email.EmailCodeService;
 import roombuddy.roombuddy.service.login.LoginService;
 import roombuddy.roombuddy.utils.ErrorCheckUtil;
@@ -31,6 +32,7 @@ import java.util.Map;
 public class LoginController {
 
     private final LoginService loginService;//로그인 서비스
+    private final JpaLoginService jpaLoginService;//Jpa 로그인 서비스
     private final EmailCodeService emailCodeService;//이메일 인증 코드 서비스
 
     /**
@@ -50,7 +52,7 @@ public class LoginController {
             return ResponseEntity.badRequest().body(ApiResponseDto.error("입력값이 올바르지 않습니다.", errorMessages));
         }
 
-        loginService.signUp(requestDto);
+        jpaLoginService.signUp(requestDto);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "회원가입 성공")));
 
     }
@@ -118,7 +120,7 @@ public class LoginController {
         }
 
         //로그인
-        TokenResponseDto tokenResponseDto = loginService.login(loginRequestDto);
+        TokenResponseDto tokenResponseDto = jpaLoginService.login(loginRequestDto);
 
         return ResponseEntity.ok().body(ApiResponseDto.success(tokenResponseDto));
 
@@ -134,7 +136,7 @@ public class LoginController {
     public ResponseEntity<ApiResponseDto<?>> logout(HttpServletRequest request) {
 
         //로그아웃
-        loginService.logout(request);
+        jpaLoginService.logout(request);
 
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "로그아웃 성공")));
 
