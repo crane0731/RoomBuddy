@@ -45,4 +45,40 @@ public class Blackout extends BaseTimeEntity {
     @Column(name = "active_status",nullable = false)
     private ActiveStatus activeStatus; //활성화 상태
 
+
+    /**
+     * [생성 메서드]
+     * @param scope 범위
+     * @param reason 이유
+     * @param startAt 시작 시간
+     * @param endAt 종료 시간
+     * @return Blackout
+     */
+    public static Blackout create(Scope scope, String reason,LocalDateTime startAt, LocalDateTime endAt) {
+        Blackout blackout = new Blackout();
+        blackout.scope = scope;
+        blackout.reason = reason;
+        blackout.startAt = startAt;
+        blackout.endAt = endAt;
+        blackout.activeStatus = ActiveStatus.ACTIVE;
+        return blackout;
+    }
+
+    /**
+     * [비즈니스 로직]
+     * 스터디룸 세팅
+     * @param room 스터디룸
+     */
+    public void assignToRoom(Room room) {
+        this.room = room;
+    }
+
+    /**
+     * [비즈니스 로직]
+     * SOFT DELETE
+     */
+    public void softDelete() {
+        this.activeStatus=ActiveStatus.INACTIVE;
+    }
+
 }

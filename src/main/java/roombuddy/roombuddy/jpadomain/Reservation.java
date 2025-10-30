@@ -45,4 +45,13 @@ public class Reservation {
     @Column(name = "active_status", nullable = false)
     private ActiveStatus activeStatus; //활성화 상태
 
+    /**
+     * [비즈니스 로직]
+     * SOFT DELETE
+     */
+    public void softDelete(){
+        this.status=ReservationStatus.CANCELED;
+        this.activeStatus=ActiveStatus.INACTIVE;
+    }
+
 }

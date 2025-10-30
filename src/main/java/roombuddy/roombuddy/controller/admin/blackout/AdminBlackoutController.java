@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import roombuddy.roombuddy.dto.api.ApiResponseDto;
 import roombuddy.roombuddy.dto.blackout.CreateBlackoutRequestDto;
+import roombuddy.roombuddy.jpaservice.blackout.JpaBlackoutService;
 import roombuddy.roombuddy.service.blackout.BlackoutService;
 import roombuddy.roombuddy.utils.ErrorCheckUtil;
 
@@ -22,6 +23,8 @@ import java.util.Map;
 public class AdminBlackoutController {
 
     private final BlackoutService blackoutService;//블랙 아웃 서비스
+    private final JpaBlackoutService jpaBlackoutService;//JPA 블랙 아웃 서비스
+
 
 
 
@@ -42,7 +45,7 @@ public class AdminBlackoutController {
             return ResponseEntity.badRequest().body(ApiResponseDto.error("입력값이 올바르지 않습니다.", errorMessages));
         }
 
-        blackoutService.createBlackout(requestDto);
+        jpaBlackoutService.createBlackout(requestDto);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "블랙 아웃 생성 성공")));
 
     }
@@ -57,7 +60,7 @@ public class AdminBlackoutController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponseDto<?>> deleteBlackout(@PathVariable("id") Long id) {
-        blackoutService.deleteBlackout(id);
+        jpaBlackoutService.deleteBlackout(id);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "블랙 아웃 제거 성공")));
 
     }
@@ -74,7 +77,7 @@ public class AdminBlackoutController {
     public ResponseEntity<ApiResponseDto<?>> getBlackoutsByRoom(@PathVariable("id") Long id,
                                                                 @RequestParam(value = "page", defaultValue = "0") int page
                                                                 ) {
-        return ResponseEntity.ok(ApiResponseDto.success(blackoutService.getBlackoutsByRoom(id,page)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaBlackoutService.getBlackoutsByRoom(id,page)));
 
     }
 
@@ -87,7 +90,7 @@ public class AdminBlackoutController {
     @GetMapping("")
     public ResponseEntity<ApiResponseDto<?>> getBlackoutsByRoom(@RequestParam(value = "page", defaultValue = "0") int page
     ) {
-        return ResponseEntity.ok(ApiResponseDto.success(blackoutService.getActiveBlackoutsByRoom(page)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaBlackoutService.getActiveBlackoutsByRoom(page)));
 
     }
 

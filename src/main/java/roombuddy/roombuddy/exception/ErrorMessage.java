@@ -34,4 +34,7 @@ public final class ErrorMessage {
      * 블랙 아웃
      */
     public static final String BLACKOUT_TIME = "블랙 아웃된 시간 입니다.";
+    public static final String NOT_FOUND_BLACKOUT = "블랙아웃을 찾을 수 없습니다.";
+
+
 }

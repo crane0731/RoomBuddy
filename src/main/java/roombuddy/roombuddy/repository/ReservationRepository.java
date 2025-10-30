@@ -7,6 +7,7 @@ import roombuddy.roombuddy.dto.reservation.ReservationSlotDto;
 import roombuddy.roombuddy.jpadomain.Reservation;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -30,6 +31,16 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             @Param("roomId") Long roomId,
             @Param("targetDate") LocalDate targetDate
     );
+
+
+    @Query( "SELECT r " +
+            "FROM Reservation r " +
+            "WHERE r.activeStatus='ACTIVE'" +
+            "AND r.status='CONFIRMED' " +
+            "AND r.startAt < :startAt " +
+            "AND r.endAt > :endAt")
+    List<Reservation> findOverlappingReservations(@Param("startAt") LocalDateTime startAt, @Param("endAt") LocalDateTime endAt);
+
 
 
 }

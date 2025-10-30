@@ -37,4 +37,10 @@ public class CustomExceptionHandler {
         return ResponseEntity.badRequest().body(ApiResponseDto.error(ex.getMessage()));
     }
 
+    @ExceptionHandler(BlackoutCustomException.class)
+    public ResponseEntity<Object> handleBlackoutCustomException(BlackoutCustomException ex) {
+        log.error("BlackoutCustomException: {}", ex.getMessage(), ex);
+        return ResponseEntity.badRequest().body(ApiResponseDto.error(ex.getMessage()));
+    }
+
 }

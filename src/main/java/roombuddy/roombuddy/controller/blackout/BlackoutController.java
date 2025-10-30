@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import roombuddy.roombuddy.dto.api.ApiResponseDto;
+import roombuddy.roombuddy.jpaservice.blackout.JpaBlackoutService;
 import roombuddy.roombuddy.service.blackout.BlackoutService;
 
 /**
@@ -15,6 +16,7 @@ import roombuddy.roombuddy.service.blackout.BlackoutService;
 public class BlackoutController {
 
     private final BlackoutService blackoutService;//블랙 아웃 서비스
+    private final JpaBlackoutService jpaBlackoutJpaService;//JPA 블랙 아웃 서비스
 
     /**
      * [컨트롤러]
@@ -25,7 +27,7 @@ public class BlackoutController {
     @GetMapping("/rooms/{id}/today")
     public ResponseEntity<ApiResponseDto<?>> getTodayBlackoutsByRoom(@PathVariable("id") Long id
     ) {
-        return ResponseEntity.ok(ApiResponseDto.success(blackoutService.getTodayBlackoutsByRoom(id)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaBlackoutJpaService.getTodayBlackoutsByRoom(id)));
 
     }
 

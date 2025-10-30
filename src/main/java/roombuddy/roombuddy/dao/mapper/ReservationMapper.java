@@ -28,7 +28,6 @@ public interface ReservationMapper {
     List<Reservation> findOverlappingReservations(@Param("startAt") LocalDateTime startAt, @Param("endAt") LocalDateTime endAt);
 
 
-
     Optional<Reservation> findById(@Param("id") Long id);
 
     void softDelete(Long id);

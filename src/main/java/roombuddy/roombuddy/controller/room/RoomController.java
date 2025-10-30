@@ -20,7 +20,7 @@ public class RoomController {
 
     private final RoomService roomService;//스터디룸 서비스
 
-    private final JpaRoomService jpaRoomService;//Jpa 룸 서비스
+    private final JpaRoomService jpaRoomService;//Jpa 스터디룸 서비스
 
     /**
      * [컨트롤러]
