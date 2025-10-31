@@ -1,9 +1,10 @@
 package roombuddy.roombuddy.jpaservice.reservation;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import roombuddy.roombuddy.dao.mapper.ReservationMapper;
 import roombuddy.roombuddy.dto.api.PagedResponseDto;
 import roombuddy.roombuddy.dto.reservation.CreateReservationRequestDto;
 import roombuddy.roombuddy.dto.reservation.MyReservationListResponseDto;
@@ -11,19 +12,21 @@ import roombuddy.roombuddy.dto.reservation.ReservationListResponseDto;
 import roombuddy.roombuddy.dto.reservation.SearchReservationCondDto;
 import roombuddy.roombuddy.exception.ErrorMessage;
 import roombuddy.roombuddy.exception.ReservationCustomException;
-import roombuddy.roombuddy.mybatisdomain.Blackout;
-import roombuddy.roombuddy.mybatisdomain.Reservation;
-import roombuddy.roombuddy.mybatisdomain.Room;
-import roombuddy.roombuddy.service.blackout.BlackoutService;
-import roombuddy.roombuddy.service.member.MemberService;
-import roombuddy.roombuddy.service.room.RoomService;
+import roombuddy.roombuddy.jpadomain.Blackout;
+import roombuddy.roombuddy.jpadomain.Member;
+import roombuddy.roombuddy.jpadomain.Reservation;
+import roombuddy.roombuddy.jpadomain.Room;
+import roombuddy.roombuddy.jpaservice.blackout.JpaBlackoutService;
+import roombuddy.roombuddy.jpaservice.member.JpaMemberService;
+import roombuddy.roombuddy.jpaservice.room.JpaRoomService;
+import roombuddy.roombuddy.repository.ReservationRepository;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 /**
- * 예약 서비스
+ * JPA 예약 서비스
  */
 
 @Service
@@ -31,10 +34,10 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class JpaReservationService {
 
-    private final MemberService memberService;//회원 서비스
-    private final RoomService roomService;//스터디 룸 서비스
-    private final BlackoutService blackoutService;//블랙 아웃 서비스
-    private final ReservationMapper reservationMapper;//예약 매퍼
+    private final JpaMemberService memberService; //회원 서비스
+    private final JpaRoomService roomService;//스터디 룸 서비스
+    private final JpaBlackoutService blackoutService;//블랙 아웃 서비스
+    private final ReservationRepository reservationRepository;//예약 레파지토리
 
 
     /**
@@ -46,8 +49,8 @@ public class JpaReservationService {
     @Transactional
     public void createReservation(Long roomId,CreateReservationRequestDto dto){
 
-        //회원 아이디 조회
-        Long memberId = memberService.getLoginMemberId();
+        //현재 로그인한 회원 조회
+        Member member = memberService.getLoginMember();
 
         //스터디룸 조회
         Room room = roomService.findById(roomId);
@@ -56,7 +59,7 @@ public class JpaReservationService {
         LocalDateTime endAt   = dto.getEndAt(); //예약 종료 시간
 
         //원하는 예약 시간으로 해당 스터디룸에 예약이 이미 있는지 확인
-        List<Reservation> conflicts = reservationMapper.findOverlappingReservationsForUpdate(roomId, startAt, endAt);
+        List<Reservation> conflicts = reservationRepository.findOverlappingReservationsByRoomIdForUpdate(roomId, startAt, endAt);
         if(!conflicts.isEmpty()){
             throw new ReservationCustomException(ErrorMessage.ALREADY_RESERVED);
         }
@@ -67,7 +70,7 @@ public class JpaReservationService {
             throw new ReservationCustomException(ErrorMessage.BLACKOUT_TIME);
         }
 
-        Reservation reservation = Reservation.create(memberId, room.getRoomId(), startAt, endAt, dto.getDuration());
+        Reservation reservation = Reservation.create(member, room, startAt, endAt, dto.getDuration());
 
         save(reservation);
 
@@ -82,17 +85,17 @@ public class JpaReservationService {
     @Transactional
     public void cancelReservation(Long reservationId){
 
-        //현재 로그인한 회원의 PK 값
-        Long memberId = memberService.getLoginMemberId();
+        //현재 로그인한 회원
+        Member member = memberService.getLoginMember();
 
         //예약 조회
         Reservation reservation = findById(reservationId);
 
         //취소 하려는 예약의 회원의 예약인지 확인
-        validateReservationOwner(memberId, reservation);
+        validateReservationOwner(member.getId(), reservation);
 
         //예약 취소
-        softDelete(reservation.getReservationId());
+        reservation.softDelete();
     }
 
     /**
@@ -105,7 +108,8 @@ public class JpaReservationService {
 
         LocalDate today = LocalDate.now(); // 오늘 날짜 (yyyy-MM-dd)
 
-        return reservationMapper.findReservationsByRoomAndDate(roomId, today);
+        return reservationRepository.findReservationsByRoomAndDate(roomId, today).stream().map(ReservationListResponseDto::create).toList();
+
     }
 
 
@@ -116,10 +120,11 @@ public class JpaReservationService {
      */
     public List<MyReservationListResponseDto> getMyReservation(){
 
-        //현재 로그인한 회원의 PK 값
-        Long memberId = memberService.getLoginMemberId();
+        //현재 로그인한 회원
+        Member member = memberService.getLoginMember();
 
-        return reservationMapper.findMyReservationByMemberIdAndDate(memberId);
+        //조회 + 응답 DTO 생성 + 반환
+        return reservationRepository.findMyReservationByMemberIdAndDate(member.getId()).stream().map(MyReservationListResponseDto::create).toList();
     }
 
 
@@ -133,11 +138,11 @@ public class JpaReservationService {
      */
     public PagedResponseDto<ReservationListResponseDto> getReservationsByRoomAndCond(SearchReservationCondDto cond, Long roomId, int page){
 
-        int offset = page * 10;
+        Page<Reservation> pageResult = reservationRepository.findAllReservationsByRoomAndCond(roomId, cond, PageRequest.of(page, 10));
+        List<ReservationListResponseDto> content = pageResult.getContent().stream().map(ReservationListResponseDto::create).toList();
 
-        List<ReservationListResponseDto> content = reservationMapper.findAllReservationsByRoomAndCond(roomId, cond, offset, 10);
-        Long total = reservationMapper.countByRoomAndCond(roomId, cond);
-        return createPagedResponseDto(content,total,page,10);
+
+        return createPagedResponseDto(content,pageResult);
     }
 
     /**
@@ -149,22 +154,21 @@ public class JpaReservationService {
      */
     public PagedResponseDto<ReservationListResponseDto> getConfirmedReservations(Long roomId,int page){
 
-        int offset = page * 10;
+        Page<Reservation> pageResult = reservationRepository.findConfirmedReservationByRoom(roomId, PageRequest.of(page, 10));
+        List<ReservationListResponseDto> content = pageResult.getContent().stream().map(ReservationListResponseDto::create).toList();
 
-        List<ReservationListResponseDto> content = reservationMapper.findConfirmedReservationByRoom(roomId,offset,10);
-        Long total = reservationMapper.countByRoom(roomId);
-        return createPagedResponseDto(content,total,page,10);
+
+        return createPagedResponseDto(content,pageResult);
     }
 
 
     /**
      * [저장]
      * @param reservation 예약
-     * @return int
      */
     @Transactional
-    public int save(Reservation reservation){
-        return reservationMapper.save(reservation);
+    public void save(Reservation reservation){
+         reservationRepository.save(reservation);
     }
 
     /**
@@ -174,40 +178,30 @@ public class JpaReservationService {
      * @return Reservation
      */
     public Reservation findById(Long reservationId){
-        return reservationMapper.findById(reservationId).orElseThrow(()->new ReservationCustomException(ErrorMessage.NOT_FOUND_RESERVATION));
+        return reservationRepository.findById(reservationId).orElseThrow(()->new ReservationCustomException(ErrorMessage.NOT_FOUND_RESERVATION));
     }
 
-    /**
-     * [SOFT DELETE]
-     * @param id PK
-     */
-    @Transactional
-    public void softDelete(Long id){
-        reservationMapper.softDelete(id);
-    }
+
 
     //==취소 하려는 예약의 회원의 예약인지 확인==//
     private void validateReservationOwner(Long memberId, Reservation reservation) {
-        if(!memberId.equals(reservation.getMemberId())){
+        if(!memberId.equals(reservation.getMember().getId())){
             throw new ReservationCustomException(ErrorMessage.NO_PERMISSION);
         }
     }
 
     //==페이징 응답 DTO 생성==//
-    private PagedResponseDto<ReservationListResponseDto> createPagedResponseDto(List<ReservationListResponseDto> content, Long total, int page, int size) {
+    private PagedResponseDto<ReservationListResponseDto> createPagedResponseDto(List<ReservationListResponseDto> content, Page<Reservation> page) {
 
-        int totalPages = (int) Math.ceil((double) total / size);
-        boolean first = page <= 0;                   // 0번 페이지면 첫 페이지
-        boolean last = (page + 1) >= totalPages;
 
         return PagedResponseDto.<ReservationListResponseDto>builder()
                 .content(content)
-                .page(page)
-                .size(size)
-                .totalPages(totalPages)
-                .totalElements(total)
-                .first(first)
-                .last(last)
+                .page(page.getNumber())
+                .size(page.getSize())
+                .totalPages(page.getTotalPages())
+                .totalElements(page.getTotalElements())
+                .first(page.isFirst())
+                .last(page.isLast())
                 .build();
     }
 

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import roombuddy.roombuddy.enums.ActiveStatus;
 import roombuddy.roombuddy.enums.ReservationStatus;
+import roombuddy.roombuddy.jpadomain.baseentity.BaseTimeEntity;
 
 import java.time.LocalDateTime;
 
@@ -13,7 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "reservation")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Reservation {
+public class Reservation extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,6 +45,28 @@ public class Reservation {
     @Enumerated(EnumType.STRING)
     @Column(name = "active_status", nullable = false)
     private ActiveStatus activeStatus; //활성화 상태
+
+    /**
+     * [생성 메서드]
+     * @param member 회원
+     * @param room 스터디룸
+     * @param startAt 시작 시간
+     * @param endAt 종료 시간
+     * @param duration 예약 기간
+     * @return Reservation
+     */
+    public static Reservation create(Member member ,Room room, LocalDateTime startAt, LocalDateTime endAt, Long duration) {
+        Reservation reservation = new Reservation();
+        reservation.member=member;
+        reservation.room = room;
+        reservation.status=ReservationStatus.CONFIRMED;
+        reservation.startAt = startAt;
+        reservation.endAt = endAt;
+        reservation.duration = duration;
+        reservation.activeStatus=ActiveStatus.ACTIVE;
+        return reservation;
+    }
+
 
     /**
      * [비즈니스 로직]

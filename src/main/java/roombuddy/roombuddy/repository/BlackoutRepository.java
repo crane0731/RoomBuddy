@@ -45,7 +45,7 @@ public interface BlackoutRepository extends JpaRepository<Blackout, Long> {
     SELECT b
     FROM Blackout b
     WHERE b.activeStatus='ACTIVE'
-        AND (b.startAt < :endAt AND b.endAt < :startAt)
+        AND (b.startAt < :endAt AND b.endAt > :startAt)
     """)
     List<Blackout>findOverlappingBlackouts(@Param("roomId")Long roomId, @Param("startAt") LocalDateTime startAt, @Param("endAt")LocalDateTime endAt);
 

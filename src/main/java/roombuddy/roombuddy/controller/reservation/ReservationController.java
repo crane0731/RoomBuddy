@@ -7,6 +7,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import roombuddy.roombuddy.dto.api.ApiResponseDto;
 import roombuddy.roombuddy.dto.reservation.CreateReservationRequestDto;
+import roombuddy.roombuddy.jpaservice.reservation.JpaReservationService;
 import roombuddy.roombuddy.service.reservation.ReservationService;
 import roombuddy.roombuddy.utils.ErrorCheckUtil;
 
@@ -22,6 +23,8 @@ import java.util.Map;
 public class ReservationController {
 
     private final ReservationService reservationService;//예약 서비스
+
+    private final JpaReservationService jpaReservationService;//JPA 예약 서비스
 
     /**
      * [컨트롤러]
@@ -41,7 +44,7 @@ public class ReservationController {
             return ResponseEntity.badRequest().body(ApiResponseDto.error("입력값이 올바르지 않습니다.", errorMessages));
         }
 
-        reservationService.createReservation(id,requestDto);
+        jpaReservationService.createReservation(id,requestDto);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "예약 성공")));
 
     }
@@ -54,7 +57,7 @@ public class ReservationController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponseDto<?>> cancelReservation(@PathVariable("id")Long id){
-        reservationService.cancelReservation(id);
+        jpaReservationService.cancelReservation(id);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "예약 취소 성공")));
     }
 
@@ -68,7 +71,7 @@ public class ReservationController {
     @GetMapping("/rooms/{id}")
     public ResponseEntity<ApiResponseDto<?>> getTodayReservation(@PathVariable("id")Long id){
 
-        return ResponseEntity.ok(ApiResponseDto.success(reservationService.getReservationsByRoomAndDate(id)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaReservationService.getReservationsByRoomAndDate(id)));
 
     }
 
@@ -80,7 +83,7 @@ public class ReservationController {
     @GetMapping("/me")
     public ResponseEntity<ApiResponseDto<?>> getMyReservation(){
 
-        return ResponseEntity.ok(ApiResponseDto.success(reservationService.getMyReservation()));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaReservationService.getMyReservation()));
 
     }
 
