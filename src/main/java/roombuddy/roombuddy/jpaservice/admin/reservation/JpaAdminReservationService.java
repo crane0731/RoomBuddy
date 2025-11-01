@@ -1,0 +1,67 @@
+package roombuddy.roombuddy.jpaservice.admin.reservation;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import roombuddy.roombuddy.dto.api.PagedResponseDto;
+import roombuddy.roombuddy.dto.reservation.ReservationListResponseDto;
+import roombuddy.roombuddy.dto.reservation.SearchReservationCondDto;
+import roombuddy.roombuddy.jpadomain.Reservation;
+import roombuddy.roombuddy.jpaservice.reservation.JpaReservationService;
+
+
+/**
+ * 관리자 - 예약 컨트롤러
+ */
+@Service
+@RequiredArgsConstructor
+@Transactional(readOnly = true)
+public class JpaAdminReservationService {
+
+    private final JpaReservationService reservationService;//예약 서비스
+
+    /**
+     * [서비스 로직]
+     * 관리자 - 예약 취소
+     * @param reservationId 예약 아이디
+     */
+    @Transactional
+    public void cancelReservation(Long reservationId) {
+
+        //예약 조회
+        Reservation reservation = reservationService.findById(reservationId);
+
+        //SOFT DELETE
+        reservation.softDelete();
+    }
+
+
+    /**
+     * [서비스 로직]
+     * 관리자 - 특정 스터디룸의 예약 로그 확인
+     * @param roomId 스터디룸 아이디
+     * @param cond 검색 조건
+     * @param page 페이지 번호
+     * @return PagedResponseDto<ReservationListResponseDto>
+     */
+    public PagedResponseDto<ReservationListResponseDto> getAllReservationsByRoom(Long roomId, SearchReservationCondDto cond,int page) {
+        return reservationService.getReservationsByRoomAndCond(cond,roomId,page);
+    }
+
+
+
+    /**
+     * [서비스 로직]
+     * 관리자 - 현재 예약 중인 예약 목록 확인
+     * @param roomId 스터디룸 아이디
+     * @param page 페이지 번호
+     * @return PagedResponseDto<ReservationListResponseDto>
+     */
+    public PagedResponseDto<ReservationListResponseDto> getConfirmedReservations(Long roomId,int page){
+
+        return reservationService.getConfirmedReservations(roomId,page);
+
+    }
+
+
+}

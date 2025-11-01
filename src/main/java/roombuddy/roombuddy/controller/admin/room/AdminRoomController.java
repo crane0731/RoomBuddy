@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import roombuddy.roombuddy.dto.api.ApiResponseDto;
 import roombuddy.roombuddy.dto.room.CreateRoomRequestDto;
 import roombuddy.roombuddy.dto.room.UpdateRoomRequestDto;
+import roombuddy.roombuddy.jpaservice.admin.room.JpaAdminRoomService;
 import roombuddy.roombuddy.service.admin.room.AdminRoomService;
 import roombuddy.roombuddy.utils.ErrorCheckUtil;
 
@@ -23,6 +24,7 @@ import java.util.Map;
 public class AdminRoomController {
 
     private final AdminRoomService adminRoomService;//관리자 스터디룸 서비스
+    private final JpaAdminRoomService jpaAdminRoomService;//JPA 관리자 스터디룸 서비스
 
     /**
      * [컨트롤러]
@@ -41,7 +43,7 @@ public class AdminRoomController {
             return ResponseEntity.badRequest().body(ApiResponseDto.error("입력값이 올바르지 않습니다.", errorMessages));
         }
 
-        adminRoomService.createRoom(requestDto);
+        jpaAdminRoomService.createRoom(requestDto);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "스터디룸 생성 성공")));
 
     }
@@ -55,7 +57,7 @@ public class AdminRoomController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponseDto<?>> deleteRoom(@PathVariable("id") Long id) {
-        adminRoomService.deleteRoom(id);
+        jpaAdminRoomService.deleteRoom(id);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "스터디룸 삭제 성공")));
 
     }
@@ -78,7 +80,7 @@ public class AdminRoomController {
             return ResponseEntity.badRequest().body(ApiResponseDto.error("입력값이 올바르지 않습니다.", errorMessages));
         }
 
-        adminRoomService.updateRoom(id,requestDto);
+        jpaAdminRoomService.updateRoom(id,requestDto);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "스터디룸 수정 성공")));
 
     }

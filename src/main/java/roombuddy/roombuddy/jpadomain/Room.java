@@ -40,6 +40,24 @@ public class Room extends BaseTimeEntity {
     private LocalTime closeTime; // 예약 가능 종료시간
 
     /**
+     * [생성 메서드]
+     * @param name 이름
+     * @param capacity 수용 인원
+     * @param openTime 예약 가능 시작 시간
+     * @param closeTime 예약 가능 종료 시간
+     * @return Room
+     */
+    public static Room create(String name , Long capacity, LocalTime openTime, LocalTime closeTime) {
+        Room room = new Room();
+        room.name = name;
+        room.capacity = capacity;
+        room.openTime = openTime;
+        room.closeTime = closeTime;
+        room.activeStatus = ActiveStatus.ACTIVE;
+        return room;
+    }
+
+    /**
      * [비즈니스 로직]
      * 업데이트
      * @param name 이름
@@ -52,6 +70,14 @@ public class Room extends BaseTimeEntity {
         this.capacity = capacity;
         this.openTime = openTime;
         this.closeTime = closeTime;
+    }
+
+    /**
+     * [비즈니스 로직]
+     * SOFT DELETE
+     */
+    public void softDelete(){
+        this.activeStatus = ActiveStatus.INACTIVE;
     }
 
 

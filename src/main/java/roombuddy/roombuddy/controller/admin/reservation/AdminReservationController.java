@@ -7,6 +7,7 @@ import roombuddy.roombuddy.dto.api.ApiResponseDto;
 import roombuddy.roombuddy.dto.reservation.SearchReservationCondDto;
 import roombuddy.roombuddy.enums.CreatedType;
 import roombuddy.roombuddy.enums.ReservationStatus;
+import roombuddy.roombuddy.jpaservice.admin.reservation.JpaAdminReservationService;
 import roombuddy.roombuddy.service.admin.reservation.AdminReservationService;
 
 import java.time.LocalDate;
@@ -22,6 +23,9 @@ public class AdminReservationController {
 
     private final AdminReservationService adminReservationService; //관리자 예약 서비스
 
+    private final JpaAdminReservationService jpaAdminReservationService;//JPA 관리자 예약 서비스
+
+
     /**
      * [컨트롤러]
      * 관리자 - 예약 취소
@@ -30,7 +34,7 @@ public class AdminReservationController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponseDto<?>> cancelReservation(@PathVariable("id")Long id){
-        adminReservationService.cancelReservation(id);
+        jpaAdminReservationService.cancelReservation(id);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "예약 취소 성공")));
     }
 
@@ -55,7 +59,7 @@ public class AdminReservationController {
                                                                              @RequestParam(value = "page",defaultValue = "0") int page
                                                                              ){
 
-        return ResponseEntity.ok(ApiResponseDto.success(adminReservationService.getAllReservationsByRoom(id, SearchReservationCondDto.create(memberEmail, status, date, created), page)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaAdminReservationService.getAllReservationsByRoom(id, SearchReservationCondDto.create(memberEmail, status, date, created), page)));
     }
 
 
@@ -72,7 +76,7 @@ public class AdminReservationController {
                                                                              @RequestParam(value = "page",defaultValue = "0") int page
     ){
 
-        return ResponseEntity.ok(ApiResponseDto.success(adminReservationService.getConfirmedReservations(id,page)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaAdminReservationService.getConfirmedReservations(id,page)));
     }
 
 }

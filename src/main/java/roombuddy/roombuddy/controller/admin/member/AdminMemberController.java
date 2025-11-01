@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import roombuddy.roombuddy.dto.api.ApiResponseDto;
 import roombuddy.roombuddy.dto.member.SearchMemberCondDto;
 import roombuddy.roombuddy.enums.MemberSortType;
+import roombuddy.roombuddy.jpaservice.admin.member.JpaAdminMemberService;
+import roombuddy.roombuddy.jpaservice.admin.reservation.JpaAdminReservationService;
 import roombuddy.roombuddy.service.admin.member.AdminMemberService;
 
 import java.util.Map;
@@ -20,6 +22,8 @@ public class AdminMemberController {
 
 
     private final AdminMemberService adminMemberService;//관리자 회원 서비스
+
+    private final JpaAdminMemberService jpaAdminMemberService;//JPA 관리자 회원 서비스
 
     /**
      * [컨트롤러]
@@ -37,7 +41,7 @@ public class AdminMemberController {
                                                         @RequestParam(value = "page",defaultValue = "0") int page
                                                         ) {
 
-        return ResponseEntity.ok(ApiResponseDto.success(adminMemberService.getMembers(SearchMemberCondDto.create(name, email, sortType), page)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaAdminMemberService.getMembers(SearchMemberCondDto.create(name, email, sortType), page)));
 
     }
 
@@ -50,7 +54,7 @@ public class AdminMemberController {
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponseDto<?>> getMemberInfo(@PathVariable Long id) {
 
-        return ResponseEntity.ok(ApiResponseDto.success(adminMemberService.getMemberInfo(id)));
+        return ResponseEntity.ok(ApiResponseDto.success(jpaAdminMemberService.getMemberInfo(id)));
     }
 
     /**
@@ -61,7 +65,7 @@ public class AdminMemberController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponseDto<?>> deleteMember(@PathVariable Long id) {
-        adminMemberService.deleteMember(id);
+        jpaAdminMemberService.deleteMember(id);
         return ResponseEntity.ok(ApiResponseDto.success(Map.of("message", "회원 삭제 성공")));
 
     }
